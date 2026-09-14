@@ -1,0 +1,11 @@
+services:
+  web:
+    build: .
+    image: eyesonsea:latest
+    container_name: eyesonsea
+    restart: unless-stopped
+    # Bound to localhost only; the host reverse proxy (nginx/caddy/traefik) fronts it.
+    ports:
+      - "127.0.0.1:3070:3000"
+    environment:
+      - NODE_ENV=production
