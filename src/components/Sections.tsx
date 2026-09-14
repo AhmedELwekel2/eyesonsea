@@ -29,7 +29,7 @@ export function Entities() {
   return (
     <Section className="border-b border-sea-100 bg-white py-10">
       <p className="mb-6 text-center text-sm font-semibold text-sea-800/70">الجهات المشاركة</p>
-      <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+      <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
         {entities.map((e) => (
           <li key={e.name} className="flex flex-col items-center gap-2 text-center">
             <div className="grid h-24 w-full place-items-center rounded-2xl border border-sea-100 bg-white p-3">

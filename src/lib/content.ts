@@ -31,14 +31,13 @@ export const hero = {
   photo: "/photos/hero-beach-group.jpg",
 };
 
-/** الجهات المشاركة — الترتيب البصري مقصود: المظلة → الراعي → الحكومي/العلمي → المنفذ → التقني */
+/** الجهات المشاركة — الترتيب البصري مقصود: المظلة → الحكومي/العلمي → المنفذ → التقني */
 export const entities = [
   { name: "برنامج «لنبادر» بمحافظة جدة", role: "المظلة المؤسسية", logo: "/logos/jeddah-governorate.png" },
-  { name: "البيك", role: "الراعي العام", logo: null },
   { name: "أمانة محافظة جدة", role: "شريك حكومي", logo: "/logos/amanat-jeddah.png" },
   { name: "الشمس للسياحة", role: "الشريك العلمي والفني", logo: "/logos/shams.png" },
   { name: "مكتب خبراء المستقبل", role: "الجهة المنفذة", logo: "/logos/future-experts.png" },
-  { name: "ترانسفورمكس", role: "الشريك التقني والبياني", logo: null },
+  { name: "ترانسفورمكس", role: "الشريك التقني والبياني", logo: "/logos/transformix.png" },
 ];
 
 export const about = {
@@ -181,7 +180,6 @@ export const dashboard = {
     { name: "خبراء المستقبل", share: "التنفيذ والقياس" },
     { name: "الشمس للسياحة", share: "المراجعة العلمية" },
     { name: "أمانة جدة", share: "التنسيق الموقعي" },
-    { name: "البيك", share: "الرعاية" },
   ],
   sites: ["قرية اللؤلؤ – جدة"],
   ctas: [
