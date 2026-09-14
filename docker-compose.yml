@@ -4,8 +4,14 @@ services:
     image: eyesonsea:latest
     container_name: eyesonsea
     restart: unless-stopped
-    # Bound to localhost only; the host reverse proxy (nginx/caddy/traefik) fronts it.
+    # Bound to localhost only; the host nginx fronts it.
     ports:
       - "127.0.0.1:3070:3000"
     environment:
       - NODE_ENV=production
+      - DATA_DIR=/app/data
+      # Set in .env on the server: ADMIN_KEY=<long random string>
+      - ADMIN_KEY=${ADMIN_KEY:?set ADMIN_KEY in .env}
+    volumes:
+      # Form submissions persist here across rebuilds.
+      - ./data:/app/data

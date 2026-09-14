@@ -1,16 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import {
-  Footer,
-  Gallery,
-  Hero,
-  Journey,
-  Partners,
-  Program,
-  RegisterCta,
-  Safety,
-  Stats,
-  Teams,
-  Threats,
+  About, Entities, FinalCta, Footer, Guardians, Hero, Impact, Partnerships, Programs, Register, Transformix, Vision2030, Workshop,
 } from "@/components/Sections";
 
 export default function Home() {
@@ -19,15 +9,17 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <Stats />
-        <Journey />
-        <Teams />
-        <Program />
-        <Threats />
-        <Gallery />
-        <Safety />
-        <Partners />
-        <RegisterCta />
+        <Entities />
+        <About />
+        <Vision2030 />
+        <Workshop />
+        <Guardians />
+        <Programs />
+        <Impact />
+        <Transformix />
+        <Partnerships />
+        <Register />
+        <FinalCta />
       </main>
       <Footer />
     </>

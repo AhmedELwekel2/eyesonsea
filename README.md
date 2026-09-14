@@ -1,7 +1,7 @@
 # عينك على البحر · Eyes on the Sea
 
-Bilingual (Arabic / English) landing page for the *Eyes on the Sea* marine-education program
-(Workshop #6 — Coral Farming Simulation, Pearl Village, Jeddah).
+Arabic (RTL) institutional landing page for the *Eyes on the Sea* initiative, under Jeddah Governorate's
+«لنبادر» volunteering & community-partnership program.
 
 ## Run
 
@@ -15,15 +15,20 @@ npm run build && npm start
 
 | Path | Purpose |
 |---|---|
-| `src/lib/i18n.ts` | All page copy in `ar` and `en`. Edit text here. |
-| `src/components/LanguageProvider.tsx` | Client context; toggles `lang`/`dir` on `<html>` and remembers the choice in `localStorage`. |
-| `src/components/Navbar.tsx` | Sticky header with language switch and mobile menu. |
-| `src/components/Sections.tsx` | Hero, Stats, Journey, Teams, Threats, Gallery, Safety, Partners, Register CTA, Footer. |
-| `public/photos/` | Workshop photos, resized to 1920px with EXIF/GPS stripped. |
+| `src/lib/content.ts` | **All page text and numbers.** Edit here, redeploy. |
+| `src/components/Sections.tsx` | The 12 page sections. |
+| `src/components/Forms.tsx` | Registration (7 tracks, consent boxes) and partnership-request modal. |
+| `src/components/DashboardDemo.tsx` | Blue Impact Dashboard demo (data from `content.ts`). |
+| `src/app/api/submissions/` | `POST` saves a form to `data/submissions.jsonl`; `GET export?key=` returns CSV for Excel. |
+| `public/photos/`, `public/logos/` | Workshop photos (EXIF stripped) and partner logos. |
 
-Default language is Arabic (RTL). The `EN / عربي` button in the navbar switches.
+## Environment
 
-## To do
+`ADMIN_KEY` — required; protects `/api/submissions/export`. Put it in `.env` (Docker) or `.env.local` (dev).
 
-- Wire the **Register** button (`RegisterCta` → `href="#"`) to a real form or registration link.
-- Replace partner name cards with logos once provided.
+## Not yet wired
+
+- Email confirmation on submit (needs an SMTP account).
+- Admin UI for editing content (use `content.ts`).
+- Logos for لنبادر, البيك, ترانسفورمكس (shown as text until supplied).
+- Video summary and testimonials (no assets yet).

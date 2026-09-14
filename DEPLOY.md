@@ -45,11 +45,15 @@ mkdir -p /root/eyesonsea && tar -xzf /root/eyesonsea.tgz -C /root/eyesonsea && r
 ```
 (Alternative: `git clone` if the repo is pushed somewhere.)
 
-### 2. Build and start the container
+### 2. Set the admin key, then build and start the container
 ```bash
-cd /root/eyesonsea && ./deploy/deploy.sh
+cd /root/eyesonsea
+echo "ADMIN_KEY=$(openssl rand -hex 24)" > .env      # protects the CSV export
+./deploy/deploy.sh
 # expect: local :3070 -> 200
 ```
+Form submissions are written to `/root/eyesonsea/data/submissions.jsonl` (Docker volume, survives rebuilds).
+Export to Excel: `https://eyesonsea.mermates.club/api/submissions/export?key=<ADMIN_KEY>&kind=register` (or `kind=partnership`).
 
 ### 3. nginx vhost (HTTP only first, so certbot can validate)
 ```bash
