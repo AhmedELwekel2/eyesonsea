@@ -1,10 +1,9 @@
 import Image from "next/image";
 import {
-  about, dashboard, entities, finalCta, footerLinks, guardians, hero, partnerships, programs, register, site, transformix, vision2030, workshop,
+  about, dashboard, entities, finalCta, footerLinks, guardians, hero, partnerships, programs, site, transformix, vision2030, workshop,
 } from "@/lib/content";
-import { Button, Check, Eyebrow, Lead, Section, Title } from "./ui";
+import { Check, Eyebrow, Lead, Section, Title } from "./ui";
 import { DashboardDemo } from "./DashboardDemo";
-import { PartnershipButton, RegisterForm } from "./Forms";
 import { WorkshopProgram } from "./WorkshopProgram";
 
 /* ---------- 1. Hero ---------- */
@@ -19,10 +18,6 @@ export function Hero() {
         <h1 className="text-5xl font-extrabold leading-tight sm:text-7xl">{hero.title}</h1>
         <p className="mt-3 text-xl font-semibold text-coral-100 sm:text-2xl">{hero.slogan}</p>
         <p className="mt-5 max-w-3xl leading-relaxed text-sea-100 sm:text-lg">{hero.text}</p>
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Button href={hero.primary.href}>{hero.primary.label}</Button>
-          <Button href={hero.secondary.href} variant="ghost" className="border-white/60 text-white hover:bg-white/15">{hero.secondary.label}</Button>
-        </div>
       </div>
     </section>
   );
@@ -187,7 +182,6 @@ export function Guardians() {
             ))}
           </ol>
           <p className="mt-6 text-sm leading-relaxed text-sea-800/80">{guardians.text2}</p>
-          <Button href={guardians.cta.href} className="mt-6">{guardians.cta.label}</Button>
         </div>
       </div>
     </Section>
@@ -212,9 +206,6 @@ export function Programs() {
           </div>
         ))}
       </div>
-      <div className="mt-10 text-center">
-        <Button href={programs.cta.href}>{programs.cta.label}</Button>
-      </div>
     </Section>
   );
 }
@@ -232,11 +223,6 @@ export function Impact() {
           <p className="mt-5 leading-relaxed text-sea-100/90">{dashboard.text}</p>
           <p className="mt-4 text-sm leading-relaxed text-sea-100/70">{dashboard.note}</p>
           <p className="mt-4 rounded-xl border border-white/10 bg-white/5 p-4 text-xs leading-relaxed text-sea-100/80">{dashboard.privacy}</p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            {dashboard.ctas.map((c, i) => (
-              <Button key={c.label} href={c.href} variant={i === 0 ? "primary" : "ghost"} className={i === 0 ? "" : "border-white/50 text-white hover:bg-white/10"}>{c.label}</Button>
-            ))}
-          </div>
         </div>
         <div className="text-sea-900">
           <DashboardDemo />
@@ -257,7 +243,6 @@ export function Transformix() {
           <Title>{transformix.title}</Title>
           <Lead>{transformix.text}</Lead>
           <p className="mt-4 leading-relaxed text-sea-800/85">{transformix.text2}</p>
-          <Button href={transformix.cta.href} variant="secondary" className="mt-6">{transformix.cta.label}</Button>
         </div>
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {transformix.capabilities.map((c) => (
@@ -285,27 +270,6 @@ export function Partnerships() {
         ))}
       </ul>
       <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-relaxed text-sea-800/80">{partnerships.text2}</p>
-      <div className="mt-8 text-center">
-        <PartnershipButton />
-      </div>
-    </Section>
-  );
-}
-
-/* ---------- 11. Register ---------- */
-
-export function Register() {
-  return (
-    <Section id="register" className="py-20">
-      <div className="mx-auto max-w-3xl text-center">
-        <Eyebrow>التسجيل</Eyebrow>
-        <Title>{register.title}</Title>
-        <p className="mt-2 text-lg font-semibold text-sea-800">{register.subtitle}</p>
-        <Lead>{register.text}</Lead>
-      </div>
-      <div className="mx-auto mt-10 max-w-3xl">
-        <RegisterForm />
-      </div>
     </Section>
   );
 }
@@ -319,11 +283,6 @@ export function FinalCta() {
         <h2 className="text-3xl font-bold sm:text-4xl">{finalCta.title}</h2>
         <p className="mx-auto mt-4 max-w-3xl leading-relaxed text-sea-100">{finalCta.text}</p>
         <p className="mt-6 text-lg font-semibold text-coral-100">{finalCta.tagline}</p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          {finalCta.ctas.map((c, i) => (
-            <Button key={c.label} href={c.href} variant={i === 0 ? "primary" : "ghost"} className={i === 0 ? "" : "border-white/50 text-white hover:bg-white/10"}>{c.label}</Button>
-          ))}
-        </div>
       </div>
     </Section>
   );

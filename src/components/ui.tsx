@@ -20,41 +20,6 @@ export function Lead({ children }: { children: ReactNode }) {
   return <p className="mt-4 leading-relaxed text-sea-800/85">{children}</p>;
 }
 
-export function Button({
-  href,
-  variant = "primary",
-  children,
-  className = "",
-  ...rest
-}: {
-  href?: string;
-  variant?: "primary" | "secondary" | "ghost";
-  children: ReactNode;
-  className?: string;
-  type?: "button" | "submit";
-  onClick?: () => void;
-  disabled?: boolean;
-}) {
-  const base = "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition disabled:opacity-60";
-  const styles = {
-    primary: "bg-coral-500 text-white shadow hover:opacity-90",
-    secondary: "bg-sea-700 text-white hover:bg-sea-800",
-    ghost: "border border-sea-700/40 text-sea-800 hover:bg-sea-100",
-  }[variant];
-  if (href) {
-    return (
-      <a href={href} className={`${base} ${styles} ${className}`}>
-        {children}
-      </a>
-    );
-  }
-  return (
-    <button className={`${base} ${styles} ${className}`} {...rest}>
-      {children}
-    </button>
-  );
-}
-
 export function Check() {
   return (
     <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-teal-700/10 text-teal-700">

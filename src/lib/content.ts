@@ -19,7 +19,6 @@ export const nav = [
   ["#programs", "برامجنا"],
   ["#impact", "أثرنا"],
   ["#partnerships", "الشراكات"],
-  ["#register", "التسجيل"],
   ["#contact", "تواصل معنا"],
 ] as const;
 

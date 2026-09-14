@@ -26,9 +26,6 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a href="#register" className="hidden rounded-full bg-coral-500 px-4 py-1.5 text-sm font-semibold text-white hover:opacity-90 sm:inline-block">
-            سجّل الآن
-          </a>
           <button className="grid h-9 w-9 place-items-center rounded-full text-sea-800 hover:bg-sea-100 lg:hidden" onClick={() => setOpen((o) => !o)} aria-label="القائمة">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               {open ? <path d="M6 6l12 12M6 18L18 6" /> : <path d="M4 7h16M4 12h16M4 17h16" />}

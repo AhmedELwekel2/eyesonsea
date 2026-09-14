@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import {
-  About, Entities, FinalCta, Footer, Guardians, Hero, Impact, Partnerships, Programs, Register, Transformix, Vision2030, Workshop,
+  About, Entities, FinalCta, Footer, Guardians, Hero, Impact, Partnerships, Programs, Transformix, Vision2030, Workshop,
 } from "@/components/Sections";
 
 export default function Home() {
@@ -18,7 +18,6 @@ export default function Home() {
         <Impact />
         <Transformix />
         <Partnerships />
-        <Register />
         <FinalCta />
       </main>
       <Footer />
