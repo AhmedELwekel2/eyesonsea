@@ -29,14 +29,14 @@ export function Hero() {
   return (
     <section id="top" className="relative isolate min-h-[88vh] overflow-hidden text-white">
       <Image
-        src="/photos/hero-mangrove-point.jpg"
+        src="/photos/hero-beach-group.jpg"
         alt=""
         fill
         priority
         sizes="100vw"
-        className="object-cover object-[70%_center]"
+        className="object-cover object-[center_60%]"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-sea-900 via-sea-900/70 to-sea-900/30" />
+      <div className="absolute inset-0 bg-gradient-to-t from-sea-900/90 via-sea-900/35 to-sea-900/20" />
       <div className="relative mx-auto flex min-h-[88vh] max-w-6xl flex-col justify-end px-4 pb-16 pt-24 sm:px-6">
         <p className="mb-4 inline-block w-fit rounded-full bg-coral-500/90 px-3 py-1 text-xs font-semibold sm:text-sm">
           {t.hero.eyebrow}
