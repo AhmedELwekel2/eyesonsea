@@ -200,7 +200,7 @@ export function Threats() {
     <Container className="py-20">
       <div className="grid items-center gap-10 lg:grid-cols-2">
         <div className="relative aspect-[16/10] overflow-hidden rounded-3xl shadow-lg">
-          <Image src="/photos/threats-ghost-nets.jpg" alt={t.threats.title} fill sizes="(min-width:1024px) 50vw, 100vw" className="object-cover" />
+          <Image src="/photos/talk-coral-slide.jpg" alt={t.threats.title} fill sizes="(min-width:1024px) 50vw, 100vw" className="object-cover" />
         </div>
         <div>
           <Eyebrow>{t.threats.eyebrow}</Eyebrow>
@@ -224,7 +224,14 @@ export function Threats() {
 
 /* ---------- Gallery ---------- */
 
-const galleryPhotos = ["/photos/mangrove-talk.jpg", "/photos/turtle-slide-3.jpg", "/photos/turtle-slide-2.jpg", "/photos/room-wide.jpg"];
+const galleryPhotos = [
+  "/photos/coral-model-hands.jpg",
+  "/photos/caps-and-vests.jpg",
+  "/photos/table-figures.jpg",
+  "/photos/outdoor-molds.jpg",
+  "/photos/speaker-banner.jpg",
+  "/photos/room-attentive.jpg",
+];
 
 export function Gallery() {
   const { t } = useLang();
@@ -234,7 +241,7 @@ export function Gallery() {
         <Eyebrow>{t.gallery.eyebrow}</Eyebrow>
         <SectionTitle>{t.gallery.title}</SectionTitle>
       </div>
-      <div className="mt-12 grid gap-4 sm:grid-cols-2">
+      <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {galleryPhotos.map((src, i) => (
           <figure key={src} className="group overflow-hidden rounded-2xl bg-white shadow-sm">
             <div className="relative aspect-video">
@@ -341,7 +348,7 @@ export function RegisterCta() {
             <p className="mt-6 text-sm text-sea-100/80">{t.cta.note}</p>
           </div>
           <div className="relative min-h-64 lg:min-h-full">
-            <Image src="/photos/turtle-slide-1.jpg" alt="" fill sizes="(min-width:1024px) 50vw, 100vw" className="object-cover" />
+            <Image src="/photos/gazebo-group.jpg" alt="" fill sizes="(min-width:1024px) 50vw, 100vw" className="object-cover" />
           </div>
         </div>
       </div>

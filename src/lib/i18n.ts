@@ -111,10 +111,12 @@ export const dictionary = {
       eyebrow: "من داخل الورشة",
       title: "لقطات من عينك على البحر",
       captions: [
-        "المدربة تشرح مهددات الشعاب المرجانية",
-        "نقاش: ماذا يحدث عندما يصبح البلاستيك طعامًا للسلاحف؟",
-        "المشاركون بقبعات البرنامج وستراته",
-        "قاعة الورشة في قرية اللؤلؤ بجدة",
+        "نموذج قاعدة التثبيت المرجانية بين أيدي المشاركين",
+        "قبعات وسترات عينك على البحر #6",
+        "مجسمات الكائنات البحرية على طاولة العمل",
+        "محطة القوالب الإسمنتية في الهواء الطلق",
+        "كلمة أمام لوحة الحملة",
+        "المشاركون يتابعون الشرح في قاعة الورشة",
       ],
     },
     safety: {
@@ -271,10 +273,12 @@ export const dictionary = {
       eyebrow: "Inside the workshop",
       title: "Moments from Eyes on the Sea",
       captions: [
-        "The facilitator explains threats to coral reefs",
-        "Discussion: what happens when plastic becomes turtle food?",
-        "Participants in program caps and vests",
-        "The workshop room at Pearl Village, Jeddah",
+        "The coral anchoring base model in participants' hands",
+        "Eyes on the Sea #6 caps and vests",
+        "Marine animal figures on the work table",
+        "The outdoor cement mold station",
+        "A word in front of the campaign banner",
+        "Participants following the talk in the workshop room",
       ],
     },
     safety: {
