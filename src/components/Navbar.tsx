@@ -1,17 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useLang } from "@/lib/i18n";
+import { useUser } from "@/lib/auth";
+import { ThemeMenu } from "./ThemeMenu";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const { lang, setLang, t } = useLang();
   const { nav, site, ui } = t;
+  const user = useUser();
 
   return (
     <header className="sticky top-0 z-50 border-b border-sea-100 bg-white/85 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-        <a href="#top" className="flex items-center gap-2 font-bold text-sea-900">
+        <Link href="/#top" className="flex items-center gap-2 font-bold text-sea-900">
           <span className="grid h-9 w-9 place-items-center rounded-full bg-sea-700 text-white">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <path d="M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0 2 2 2 2" />
@@ -19,7 +23,7 @@ export function Navbar() {
             </svg>
           </span>
           <span>{site.name}</span>
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-5 text-sm font-medium text-sea-800 lg:flex">
           {nav.map(([href, label]) => (
@@ -28,6 +32,12 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          {user && (
+            <Link href="/dashboard" className="hidden rounded-full bg-sea-700 px-3 py-1.5 text-xs font-bold text-white hover:bg-sea-800 sm:inline-flex">
+              {ui.myDashboard}
+            </Link>
+          )}
+          <ThemeMenu />
           <button
             onClick={() => setLang(lang === "ar" ? "en" : "ar")}
             aria-label={ui.switchLang}
@@ -49,6 +59,9 @@ export function Navbar() {
           {nav.map(([href, label]) => (
             <a key={href} href={href} onClick={() => setOpen(false)} className="rounded-lg px-3 py-2 font-medium text-sea-800 hover:bg-sea-100">{label}</a>
           ))}
+          {user && (
+            <Link href="/dashboard" onClick={() => setOpen(false)} className="rounded-lg px-3 py-2 font-bold text-sea-700 hover:bg-sea-100">{ui.myDashboard}</Link>
+          )}
         </nav>
       )}
     </header>

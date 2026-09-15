@@ -2,8 +2,8 @@
 
 import { useLang } from "@/lib/i18n";
 
-const PRE = "#0f6b95";
-const POST = "#38bdf8";
+const PRE = "var(--sea-700)";
+const POST = "var(--coral-500)";
 
 export function DashboardDemo() {
   const { dashboard } = useLang().t;

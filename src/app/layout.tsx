@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/lib/i18n";
+import { themeInitScript } from "@/lib/theme";
 
 const arabic = IBM_Plex_Sans_Arabic({
   variable: "--font-arabic",
@@ -31,6 +32,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ar" dir="rtl" className={`${arabic.variable} h-full antialiased scroll-smooth`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="min-h-full flex flex-col">
         <LanguageProvider>{children}</LanguageProvider>
       </body>

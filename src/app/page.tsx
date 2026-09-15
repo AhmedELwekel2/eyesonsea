@@ -3,6 +3,7 @@ import {
   About, Entities, FinalCta, Footer, Guardians, Hero, Impact, Partnerships, Programs, Transformix, Vision2030, Workshop,
 } from "@/components/Sections";
 import { VideoGallery } from "@/components/VideoGallery";
+import { Register } from "@/components/Register";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <Impact />
         <Transformix />
         <Partnerships />
+        <Register />
         <FinalCta />
       </main>
       <Footer />

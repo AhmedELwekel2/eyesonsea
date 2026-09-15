@@ -30,6 +30,15 @@ export function Hero() {
           <span className="text-sm font-medium text-sea-100 sm:text-base">{hero.workshopSubtitle}</span>
         </p>
         <p className="mt-4 max-w-3xl text-sm leading-relaxed text-sea-100 sm:mt-5 sm:text-base lg:text-lg">{hero.text}</p>
+        <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
+          <a href={hero.primary.href} className="inline-flex items-center gap-2 rounded-full bg-coral-500 px-6 py-3 text-sm font-bold text-sea-900 shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:text-base">
+            {hero.primary.label}
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="rtl:-scale-x-100"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
+          <a href={hero.secondary.href} className="inline-flex items-center rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20 sm:text-base">
+            {hero.secondary.label}
+          </a>
+        </div>
       </div>
     </section>
   );

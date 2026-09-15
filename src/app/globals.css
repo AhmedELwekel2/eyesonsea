@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
-:root {
+:root,
+:root[data-theme="ocean"] {
+  /* 🌊 Ocean Blue (الافتراضي) */
   --background: #f6fbfc;
   --foreground: #0b2a3a;
   --sea-900: #062f45;
@@ -8,10 +10,55 @@
   --sea-700: #0f6b95;
   --sea-500: #1c9ccf;
   --sea-100: #dff1f8;
-  --coral-500: #38bdf8; /* لهجة زرقاء فاتحة (كانت مرجانية) */
+  --coral-500: #38bdf8;
   --coral-100: #bae6fd;
   --sand-100: #eaf3fa;
   --teal-700: #0369a1;
+}
+
+:root[data-theme="coral"] {
+  /* 🪸 Coral — درجات دافئة مستوحاة من المرجان */
+  --background: #fff8f5;
+  --foreground: #3a1f1a;
+  --sea-900: #4a2620;
+  --sea-800: #7a3b32;
+  --sea-700: #b8503f;
+  --sea-500: #ef7a5d;
+  --sea-100: #fde9e2;
+  --coral-500: #ffb199;
+  --coral-100: #ffd9cc;
+  --sand-100: #fdf1ea;
+  --teal-700: #b8503f;
+}
+
+:root[data-theme="marine"] {
+  /* 🌿 Marine Green — فيروزي/أخضر بحري */
+  --background: #f4fbf9;
+  --foreground: #0b3330;
+  --sea-900: #063d3a;
+  --sea-800: #0b5c56;
+  --sea-700: #0f7f77;
+  --sea-500: #1fb2a6;
+  --sea-100: #dbf3ef;
+  --coral-500: #5eead4;
+  --coral-100: #b5f0e6;
+  --sand-100: #eaf6f2;
+  --teal-700: #0e766e;
+}
+
+:root[data-theme="light"] {
+  /* 🤍 Clean Light — واجهة بيضاء بسيطة بلهجة زرقاء */
+  --background: #ffffff;
+  --foreground: #1f2933;
+  --sea-900: #1f2933;
+  --sea-800: #334155;
+  --sea-700: #475569;
+  --sea-500: #2563eb;
+  --sea-100: #f1f5f9;
+  --coral-500: #60a5fa;
+  --coral-100: #dbeafe;
+  --sand-100: #f8fafc;
+  --teal-700: #2563eb;
 }
 
 @theme inline {
@@ -33,6 +80,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-arabic), system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .wave-divider {

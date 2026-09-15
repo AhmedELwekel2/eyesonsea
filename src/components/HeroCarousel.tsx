@@ -18,7 +18,9 @@ export function HeroCarousel() {
     const el = track.current;
     if (!el) return;
     const n = ((i % slides.length) + slides.length) % slides.length;
-    el.children[n]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+    // نحرّك مسار السلايدر فقط (scrollIntoView كان يسحب الصفحة كلها إلى الهيرو أثناء التشغيل التلقائي)
+    const sign = getComputedStyle(el).direction === "rtl" ? -1 : 1;
+    el.scrollTo({ left: sign * n * el.clientWidth, behavior: "smooth" });
   }, [slides.length]);
 
   // تتبع الشريحة الظاهرة أثناء التمرير (يعمل مع RTL حيث تكون scrollLeft سالبة)
@@ -37,10 +39,18 @@ export function HeroCarousel() {
     };
   }, []);
 
-  // تشغيل تلقائي — يتوقف عند اللمس/التمرير بالمؤشر
+  // تشغيل تلقائي — يتوقف عند اللمس/التمرير بالمؤشر أو عندما يكون الهيرو خارج الشاشة
+  const visible = useRef(true);
+  useEffect(() => {
+    const el = track.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => (visible.current = e.isIntersecting), { threshold: 0.2 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
   useEffect(() => {
     const id = setInterval(() => {
-      if (!paused.current && !document.hidden) goTo(index + 1);
+      if (!paused.current && visible.current && !document.hidden) goTo(index + 1);
     }, AUTOPLAY_MS);
     return () => clearInterval(id);
   }, [index, goTo]);
