@@ -1,228 +1,593 @@
 /**
- * كل نصوص الموقع وأرقامه في هذا الملف.
+ * كل نصوص الموقع وأرقامه في هذا الملف (عربي + إنجليزي).
  * لتعديل رقم أو نص: عدّل القيمة هنا فقط ثم أعد النشر.
+ * All site copy and numbers live here (Arabic + English). Both locales share the same shape.
  */
 
-export const site = {
-  name: "عينك على البحر",
-  slogan: "نبادر اليوم… ليبقى بحرنا للأجيال القادمة",
-  umbrella: "ضمن برنامج التطوع والشراكة المجتمعية «لنبادر» بمحافظة جدة",
-  email: "info@mermates.club", // ← ضع البريد الرسمي
-  phone: "+966 5X XXX XXXX", // ← ضع رقم التواصل
-  location: "جدة – المملكة العربية السعودية",
+export type Lang = "ar" | "en";
+
+const ar = {
+  site: {
+    name: "عينك على البحر",
+    slogan: "نبادر اليوم… ليبقى بحرنا للأجيال القادمة",
+    umbrella: "ضمن برنامج التطوع والشراكة المجتمعية «لنبادر» بمحافظة جدة",
+    email: "info@mermates.club", // ← ضع البريد الرسمي
+    phone: "+966 5X XXX XXXX", // ← ضع رقم التواصل
+    location: "جدة – المملكة العربية السعودية",
+  },
+
+  nav: [
+    ["#top", "الرئيسية"],
+    ["#about", "عن المبادرة"],
+    ["#workshop", "الورشة"],
+    ["#videos", "الفيديو"],
+    ["#programs", "برامجنا"],
+    ["#impact", "أثرنا"],
+    ["#partnerships", "الشراكات"],
+    ["#contact", "تواصل معنا"],
+  ] as [string, string][],
+
+  /** نصوص واجهة صغيرة متكررة */
+  ui: {
+    menu: "القائمة",
+    switchLang: "English",
+    switchLangShort: "EN",
+    entities: "الجهات المشاركة",
+    aboutEyebrow: "عن المبادرة",
+    umbrellaHeading: "التطوع والشراكة المجتمعية في خدمة جدة",
+    vision: "رؤيتنا",
+    mission: "رسالتنا",
+    vision2030Eyebrow: "رؤية السعودية 2030",
+    programsEyebrow: "برامجنا",
+    partnershipsEyebrow: "الشراكات",
+    contact: "تواصل معنا",
+    contactText: "للتسجيل في البرامج المقبلة، أو ترشيح المدارس والمستفيدين، أو مناقشة فرص الشراكة والرعاية:",
+    emailLabel: "البريد الإلكتروني",
+    phoneLabel: "رقم التواصل",
+    locationLabel: "الموقع",
+    rights: "جميع الحقوق محفوظة",
+    pathArrow: "←",
+    prev: "الصورة السابقة",
+    next: "الصورة التالية",
+    play: "تشغيل",
+    close: "إغلاق",
+    prevVideo: "المقطع السابق",
+    nextVideo: "المقطع التالي",
+    videoOf: "من",
+  },
+
+  hero: {
+    title: "عينك على البحر",
+    slogan: "نبادر اليوم… ليبقى بحرنا للأجيال القادمة",
+    /** سطر الورشة في الواجهة الرئيسية */
+    workshopName: "البحر على عينك",
+    workshopSubtitle: "ورشة محاكاة استزراع المرجان والاستدامة البحرية",
+    text: "مبادرة تعليمية ومجتمعية ضمن برنامج التطوع والشراكة المجتمعية «لنبادر» بمحافظة جدة، تهدف إلى تنمية وعي الأطفال واليافعين بالبيئة البحرية، وتعزيز مشاركتهم في حماية البحر الأحمر وشعابه المرجانية من خلال التعلم التجريبي، والعلوم المجتمعية، والتطوع، والتقنية.",
+    primary: { label: "سجّل في الورش المقبلة", href: "#register" },
+    secondary: { label: "كن شريكًا في المبادرة", href: "#partnerships" },
+    photo: "/photos/hero-beach-group.jpg",
+    /** صور السلايدر — position = نقطة التركيز عند القص (object-position) */
+    slides: [
+      { src: "/photos/hero-beach-group.jpg", alt: "صورة جماعية للمشاركين على شاطئ قرية اللؤلؤ", position: "center 65%" },
+      { src: "/photos/gazebo-group.jpg", alt: "المجموعات قبل المحاكاة الساحلية", position: "center 40%" },
+      { src: "/photos/coral-model-hands.jpg", alt: "نموذج قاعدة التثبيت المرجانية بين أيدي المشاركين", position: "center 45%" },
+      { src: "/photos/caps-and-vests.jpg", alt: "قبعات وسترات عينك على البحر #6", position: "center 35%" },
+      { src: "/photos/outdoor-molds.jpg", alt: "محطة القوالب الإسمنتية في الهواء الطلق", position: "center 55%" },
+    ] as { src: string; alt: string; position?: string }[],
+  },
+
+  /** الجهات المشاركة — الشعارات من ترويسة «خطة صيانة وتنظيف مشتل المرجان في شاطئ لا مير» بالترتيب نفسه */
+  entities: [
+    { name: "إمارة منطقة مكة المكرمة – محافظة جدة", role: "المظلة المؤسسية", logo: "/logos/jeddah-governorate.png" },
+    { name: "برنامج «لنبادر»", role: "برنامج التطوع والشراكة المجتمعية", logo: "/logos/lnobader.png" },
+    { name: "البيك للأنظمة الغذائية", role: "الجهة المنظمة", logo: "/logos/albaik.png" },
+    { name: "أمانة محافظة جدة", role: "شريك حكومي", logo: "/logos/amanat-jeddah.png" },
+    { name: "17 SIXTY", role: "شريك داعم", logo: "/logos/17sixty.png" },
+  ],
+
+  about: {
+    title: "من المعرفة إلى المشاركة والأثر",
+    text: "تقدم «عينك على البحر» تجربة تعليمية تربط الأطفال واليافعين بالبيئة البحرية من خلال المعرفة العلمية، والتعلم بالممارسة، والمحاكاة الآمنة، والعلوم المجتمعية، والتطوع. لا تقدم المبادرة المعرفة في صورة محاضرات نظرية فقط، بل تحولها إلى تجربة متكاملة تبدأ بالتعرف إلى البيئة البحرية، ثم الملاحظة والتجربة والمحاكاة، وتنتهي بالمشاركة والتوثيق والتقييم والتطوع.",
+    umbrellaTitle: "تحت مظلة «لنبادر»",
+    umbrellaText: "«لنبادر» هو برنامج التطوع والشراكة المجتمعية بمحافظة جدة، ويعمل على تعزيز مشاركة الجهات الحكومية والقطاع الخاص والمؤسسات غير الربحية وأفراد المجتمع في تصميم وتنفيذ المبادرات التي تخدم المحافظة وسكانها. وتأتي «عينك على البحر» امتدادًا لهذا التوجه، بتقديم نموذج متخصص في التوعية بالبيئة البحرية يربط بين التعليم والتطوع والمسؤولية الاجتماعية والشراكة المؤسسية.",
+    umbrellaGoals: [
+      "تنظيم مشاركة المجتمع في حماية البيئة البحرية.",
+      "إشراك الأطفال واليافعين في برامج تعليمية وتطوعية مناسبة لأعمارهم.",
+      "بناء شراكات تجمع بين الجهات الحكومية والقطاع الخاص والمؤسسات العلمية والتعليمية.",
+      "تحويل الفعاليات الفردية إلى برامج ممتدة يمكن متابعتها وقياس نتائجها.",
+      "دعم المبادرات النوعية التي تعزز مكانة جدة بوصفها مدينة بحرية ذات مسؤولية بيئية ومجتمعية.",
+    ],
+    steps: [
+      { name: "اكتشف", desc: "تعرف إلى البحر الأحمر وشعابه المرجانية والكائنات المرتبطة بها." },
+      { name: "جرّب", desc: "شارك في أنشطة تعليمية ومحاكاة عملية آمنة." },
+      { name: "تأمل", desc: "ناقش ما شاهدته وتعلمته، واربطه بسلوكك اليومي." },
+      { name: "طوّر", desc: "اكتسب مهارات جديدة في الملاحظة والتوثيق والعمل الجماعي." },
+      { name: "اصنع أثرًا", desc: "شارك في التطوع والعلوم المجتمعية والمبادرات البيئية المستقبلية." },
+    ],
+    vision: "الإسهام في بناء جيل واعٍ بالبيئة البحرية، معتز بثروات وطنه الطبيعية، وقادر على المشاركة العلمية والمجتمعية في حمايتها.",
+    mission: "تقديم برامج تعليمية وتطوعية نوعية للأطفال واليافعين، تربط المعرفة بالتطبيق، وتجمع بين التعليم والعلوم المجتمعية والمسؤولية الوطنية، ضمن بيئة آمنة وشراكات مؤسسية وأدوات تقنية تدعم قياس الأثر واستدامته.",
+  },
+
+  vision2030: {
+    title: "مبادرة مجتمعية تدعم التوجهات الوطنية",
+    lead: "تسهم المبادرة في دعم مستهدفات رؤية السعودية 2030",
+    cards: [
+      { title: "مجتمع حيوي", desc: "تنمية الوعي البيئي وتعزيز جودة الحياة والارتباط بموارد الوطن الطبيعية." },
+      { title: "العمل التطوعي", desc: "إتاحة فرص تطوعية منظمة للأطفال واليافعين لخدمة البيئة والمجتمع." },
+      { title: "الشراكة المجتمعية", desc: "الجمع بين الجهات الحكومية والقطاع الخاص والمدارس والمؤسسات العلمية." },
+      { title: "التحول الرقمي", desc: "استخدام التقنية والبيانات في تسجيل المستفيدين وقياس أثر المبادرة." },
+    ],
+    disclaimer: "لا يعني هذا الارتباط أن المبادرة أحد برامج تحقيق الرؤية رسميًا، وإنما أنها تسهم، من خلال أهدافها وأنشطتها ومؤشرات أثرها، في دعم التوجهات الوطنية ذات الصلة.",
+  },
+
+  workshop: {
+    eyebrow: "نجاح المرحلة التطبيقية الأولى",
+    title: "ورشة ناجحة… وبداية لأثر مستدام",
+    text: "اختُتمت المرحلة التطبيقية الأولى من «عينك على البحر #6» بنجاح، وسط تفاعل متميز من الأطفال واليافعين وأسرهم، وبمشاركة الجهات الداعمة والعلمية والتنفيذية. وجمعت الورشة بين التوعية بالبيئة البحرية، والتدريب على السلامة، والمحاكاة التعليمية لمبادئ استزراع الشعاب المرجانية، والعمل الجماعي، والتوثيق، والعلوم المجتمعية.",
+    text2: "لم تعتمد التجربة على التلقين، بل أتاحت للمشاركين التعلم بالممارسة وطرح الأسئلة ومناقشة التحديات البيئية، والمشاركة في تنفيذ نماذج تدريبية توضح بصورة آمنة كيف تعمل مشروعات حماية الشعاب المرجانية واستعادتها.",
+    /** أرقام الورشة — حدّثها بالأرقام الفعلية بعد اعتماد التقرير */
+    stats: [
+      { value: "20", label: "مشاركًا" },
+      { value: "6", label: "ساعات تدريبية" },
+      { value: "2", label: "يومان تطبيقيان" },
+      { value: "4", label: "جهات مشاركة" },
+    ],
+    date: "الأربعاء 9 والخميس 10 سبتمبر 2026 · قرية اللؤلؤ – جدة",
+    gallery: [
+      { src: "/photos/coral-model-hands.jpg", caption: "نموذج قاعدة التثبيت المرجانية بين أيدي المشاركين" },
+      { src: "/photos/caps-and-vests.jpg", caption: "قبعات وسترات عينك على البحر #6" },
+      { src: "/photos/table-figures.jpg", caption: "مجسمات الكائنات البحرية على طاولة العمل" },
+      { src: "/photos/outdoor-molds.jpg", caption: "محطة القوالب الإسمنتية في الهواء الطلق" },
+      { src: "/photos/talk-coral-slide.jpg", caption: "التعريف بالشعاب المرجانية ومهدداتها" },
+      { src: "/photos/room-attentive.jpg", caption: "المشاركون يتابعون الشرح في قاعة الورشة" },
+      { src: "/photos/speaker-banner.jpg", caption: "كلمة أمام لوحة الحملة" },
+      { src: "/photos/gazebo-group.jpg", caption: "المجموعات قبل المحاكاة الساحلية" },
+    ],
+    days: [
+      {
+        label: "اليوم الأول",
+        focus: "الفهم العلمي وبناء النموذج",
+        items: [
+          ["4:30", "الاستقبال والتسجيل والقياس القبلي"],
+          ["4:45", "الافتتاح وشرح حدود المحاكاة"],
+          ["5:00", "البحر تحت المجهر: الشعاب المرجانية ومهدداتها"],
+          ["5:25", "السلامة والمسؤولية"],
+          ["5:40", "عرض فني مباشر للهيكل والقواعد التعليمية"],
+          ["6:10", "محطات التصنيع بالتناوب"],
+          ["6:50", "التجميع والتوثيق"],
+          ["7:10", "عرض المجموعات والتأمل"],
+        ] as [string, string][],
+      },
+      {
+        label: "اليوم الثاني",
+        focus: "المحاكاة الساحلية والعلوم المجتمعية",
+        items: [
+          ["4:30", "فحص الجاهزية ومراجعة تفاعلية"],
+          ["4:55", "إحاطة السلامة الساحلية وتجربة جافة"],
+          ["5:25", "المحاكاة الساحلية بالتناوب (مجموعة واحدة في كل مرة)"],
+          ["6:05", "الاسترجاع والحصر: لا نترك شيئًا في البحر"],
+          ["6:30", "مختبر العلوم المجتمعية"],
+          ["6:50", "قياس الأثر: الاختبار البعدي والاستبيان"],
+          ["7:10", "رسائل حماة البحر والتعهد السلوكي"],
+          ["7:25", "الختام والتكريم"],
+        ] as [string, string][],
+      },
+    ],
+  },
+
+  /** معرض الفيديو — المقاطع في public/videos، والـ poster صورة مصغّرة مضغوطة لكل مقطع */
+  videos: {
+    eyebrow: "معرض الفيديو",
+    title: "شاهد الورشة كما عاشها المشاركون",
+    text: "لقطات قصيرة من المرحلة التطبيقية الأولى: قاعة الورشة، والمحطات الساحلية، ومختبر العلوم المجتمعية.",
+    featuredBadge: "المقطع المميز",
+    count: "6 مقاطع",
+    campaignTile: "الحملة التطوعية لحماية البيئة البحرية لمدينة جدة",
+    items: [
+      { src: "/videos/workshop-5.mp4", poster: "/videos/workshop-5.jpg", duration: 38, title: "لحظات من قاعة الورشة", desc: "الأطفال واليافعون يتابعون الشرح ويشاركون في النقاش." },
+      { src: "/videos/workshop-1.mp4", poster: "/videos/workshop-1.jpg", duration: 21, title: "جولة في معرض التوعية", desc: "شرح لوحات البيئة البحرية للمشاركين وأسرهم." },
+      { src: "/videos/workshop-6.mp4", poster: "/videos/workshop-6.jpg", duration: 27, title: "مختبر العلوم المجتمعية", desc: "تسجيل الملاحظات وتوثيق النتائج على الحاسوب." },
+      { src: "/videos/workshop-4.mp4", poster: "/videos/workshop-4.jpg", duration: 11, title: "شركاء النجاح", desc: "لوحة الحملة وشركاؤها في موقع الفعالية." },
+      { src: "/videos/workshop-2.mp4", poster: "/videos/workshop-2.jpg", duration: 12, title: "موقع الورشة على الشاطئ", desc: "إطلالة على واجهة قرية اللؤلؤ قبل المحاكاة الساحلية." },
+      { src: "/videos/workshop-3.mp4", poster: "/videos/workshop-3.jpg", duration: 10, title: "محطة القوالب في الهواء الطلق", desc: "تجهيز القوالب الإسمنتية للنماذج التدريبية." },
+    ] as { src: string; poster: string; duration: number; title: string; desc: string }[],
+  },
+
+  guardians: {
+    eyebrow: "حماة مرجان الوطن",
+    title: "من مشارك إلى حامٍ لمرجان الوطن",
+    text: "«حماة مرجان الوطن» هو المسار التعليمي والتطوعي الممتد لمبادرة «عينك على البحر»، وينقل الأطفال واليافعين من مرحلة التوعية إلى التدريب والملاحظة والتوثيق والعلوم المجتمعية والمشاركة في الأنشطة البيئية المستقبلية، وفق عمر المشارك وتأهيله وطبيعة النشاط.",
+    text2: "ويحصل المشاركون على توثيق لمشاركتهم وساعاتهم التطوعية بعد استكمال متطلبات البرنامج، بما يساعدهم على بناء سجل مبكر من المشاركة المجتمعية والمسؤولية الوطنية.",
+    path: ["التوعية", "التدريب والمحاكاة", "الملاحظة والتوثيق", "العلوم المجتمعية", "التطوع البيئي"],
+    cta: { label: "انضم إلى حماة مرجان الوطن", href: "#register" },
+    photo: "/photos/caps-and-vests.jpg",
+  },
+
+  programs: {
+    title: "برامج المبادرة",
+    items: [
+      { title: "ورش التوعية البحرية", desc: "برامج تفاعلية تقدم للأطفال واليافعين معرفة مناسبة لأعمارهم حول البحر الأحمر، والشعاب المرجانية، والتنوع الأحيائي، والمخاطر البيئية، والسلوك المسؤول في المواقع الساحلية." },
+      { title: "محاكاة استزراع الشعاب المرجانية", desc: "تجربة تعليمية آمنة تشرح مبادئ حماية الشعاب المرجانية واستعادتها واستزراعها باستخدام نماذج وقطع تدريبية، من دون التعامل مع مرجان حي أو تنفيذ أعمال بحرية غير مصرح بها." },
+      { title: "العلوم المجتمعية", desc: "أنشطة مبسطة تساعد المشاركين على الملاحظة والتصوير والتسجيل والتوثيق، وتوضح كيف يمكن للمجتمع أن يسهم في دعم المعرفة العلمية ورصد التغيرات البيئية." },
+      { title: "التطوع البيئي", desc: "فرص للمشاركة في التوعية، وتنظيم الفعاليات، وخدمة المواقع، والتوثيق، ودعم المشاركين الأصغر سنًا، وفق ضوابط السلامة والأدوار المعتمدة." },
+      { title: "البرامج المدرسية", desc: "برامج مصممة للمدارس تشمل الزيارات التعليمية، والورش التطبيقية، والتعلم الإلكتروني، والمشروعات الطلابية، والأنشطة المرتبطة بالساعات التطوعية وخدمة المجتمع." },
+      { title: "البرامج الأسرية", desc: "لقاءات وأنشطة تساعد الأسرة على فهم دورها في بناء السلوك البيئي، وتشجع أولياء الأمور على مشاركة أبنائهم في خبرات تعليمية ومجتمعية مستمرة." },
+    ],
+    cta: { label: "سجّل اهتمامك بالبرامج المقبلة", href: "#register" },
+  },
+
+  dashboard: {
+    eyebrow: "Blue Impact Dashboard",
+    title: "لوحة الأثر الأزرق",
+    subtitle: "من الأنشطة إلى نتائج قابلة للقياس",
+    text: "منصة رقمية تطورها ترانسفورمكس لتسجيل المستفيدين، وتوثيق الأنشطة والساعات التطوعية، وقياس نتائج التعلم، ومتابعة مساهمات الشركاء، وإعداد تقارير الأثر للجهات الحكومية والرعاة والمدارس.",
+    note: "نموذج توضيحي بأرقام المرحلة الأولى. تتيح المنصة مستويات عرض مختلفة: مؤشرات إجمالية للجمهور، وتقارير تفصيلية للجهات الحكومية والشركاء وفق الصلاحيات المعتمدة.",
+    privacy: "تلتزم المنصة بحماية بيانات الأطفال واليافعين، والحصول على موافقات أولياء الأمور، وتنظيم صلاحيات الوصول، وعدم نشر الصور أو المعلومات الشخصية إلا وفق الموافقات والسياسات المعتمدة.",
+    demoTitle: "لوحة الأثر الأزرق · نموذج توضيحي",
+    demoBadge: "المرحلة الأولى · 2026",
+    prePostTitle: "نتائج القياس القبلي والبعدي (%)",
+    pre: "قبلي",
+    post: "بعدي",
+    partnersTitle: "مساهمة الجهات المشاركة",
+    sitesTitle: "انتشار الأنشطة",
+    sitesNote: "مواقع جديدة تُضاف مع كل مرحلة",
+    /** بيانات النموذج التوضيحي — حدّثها من تقرير الورشة */
+    kpis: [
+      { label: "المستفيدون", value: 20, unit: "مشاركًا" },
+      { label: "ساعات التدريب", value: 120, unit: "ساعة", hint: "20 مشاركًا × 6 ساعات" },
+      { label: "البرامج المنفذة", value: 1, unit: "ورشة" },
+      { label: "الجهات المشاركة", value: 4, unit: "جهات" },
+      { label: "الرضا المستهدف", value: 85, unit: "%" },
+      { label: "استرجاع المواد", value: 100, unit: "%" },
+    ] as { label: string; value: number; unit: string; hint?: string }[],
+    /** نتائج القياس القبلي/البعدي — قيم مستهدفة حتى يُعتمد التقرير */
+    prePost: [
+      { topic: "الشعاب المرجانية", pre: 45, post: 80 },
+      { topic: "المهددات البحرية", pre: 40, post: 78 },
+      { topic: "السلامة الساحلية", pre: 55, post: 90 },
+      { topic: "العلوم المجتمعية", pre: 30, post: 70 },
+    ],
+    partnersContribution: [
+      { name: "خبراء المستقبل", share: "التنفيذ والقياس" },
+      { name: "الشمس للسياحة", share: "المراجعة العلمية" },
+      { name: "أمانة جدة", share: "التنسيق الموقعي" },
+    ],
+    sites: ["قرية اللؤلؤ – جدة"],
+    ctas: [
+      { label: "استعرض لوحة الأثر", href: "#impact" },
+      { label: "اطلب عرضًا للجهات الحكومية", href: "#partnerships" },
+    ],
+  },
+
+  transformix: {
+    eyebrow: "ترانسفورمكس",
+    title: "الشريك التقني والبياني للمبادرة",
+    text: "تتولى ترانسفورمكس تطوير الحلول الرقمية للمبادرة، بما يشمل التسجيل الإلكتروني، وإدارة بيانات المستفيدين، والتقييمات، والشهادات، وتحليل البيانات، ولوحات مؤشرات الأداء، وتقارير الأثر.",
+    text2: "يساعد هذا الدور على نقل المبادرة من توثيق الفعاليات بصورة تقليدية إلى نموذج رقمي يدعم اتخاذ القرار، ويمنح الجهات الحكومية والرعاة والشركاء رؤية واضحة لما تم تنفيذه وما تحقق من نتائج. ويمكن تطبيق هذا النموذج على المبادرات الحكومية والمجتمعية الأخرى.",
+    capabilities: ["التسجيل الإلكتروني", "إدارة المستفيدين", "التقييم والشهادات", "تحليل البيانات", "لوحات المؤشرات", "تقارير الأثر"],
+    cta: { label: "ناقش معنا تطوير منصة لقياس الأثر", href: "#partnerships" },
+  },
+
+  partnerships: {
+    title: "معًا نصنع أثرًا مستدامًا",
+    text: "ترحب «عينك على البحر» بالشراكة مع الجهات الحكومية، والأمانات والبلديات، والمدارس والجامعات، والمراكز العلمية، والشركات، والمؤسسات غير الربحية، لتنفيذ برامج مشتركة في التوعية البحرية والعلوم المجتمعية والتطوع البيئي.",
+    areas: ["رعاية البرامج", "استضافة الفعاليات", "ترشيح المستفيدين", "تقديم الخبرة العلمية", "دعم العمل التطوعي", "تطوير المنصات الرقمية", "قياس الأثر وإعداد التقارير"],
+    text2: "يتيح نموذج المبادرة للجهات الانتقال من دعم فعالية قصيرة إلى المشاركة في برنامج مستدام، يمتلك محتوى تعليميًا، ومسارًا للمستفيد، وأدوات للتقييم، ونظامًا رقميًا لقياس الأثر.",
+    cta: "طلب اجتماع شراكة",
+    types: ["رعاية", "استضافة فعاليات", "ترشيح مستفيدين", "دعم علمي", "تطوع", "تحول رقمي", "قياس أثر", "أخرى"],
+  },
+
+  register: {
+    title: "التسجيل في الورش المقبلة",
+    subtitle: "افتح لأبنائك بابًا جديدًا للتعلم والمشاركة",
+    text: "بعد نجاح المرحلة الأولى، تستعد «عينك على البحر» لإطلاق برامج وورش جديدة تتيح لمزيد من الأطفال واليافعين التعرف إلى البيئة البحرية والمشاركة في أنشطة تعليمية وتطوعية مناسبة لأعمارهم. يمثل التسجيل إبداء اهتمام أوليًا، وسيتم التواصل مع المسجلين عند اعتماد مواعيد البرامج ومواقعها وشروط المشاركة.",
+    types: ["ولي أمر", "مدرسة", "مشارك", "متطوع", "مساعد يافع", "جهة حكومية", "شريك علمي", "راعٍ"],
+    success: "شكرًا لاهتمامكم بمبادرة «عينك على البحر». سيتواصل معكم فريق المبادرة عند اعتماد البرامج والمواعيد المقبلة.",
+  },
+
+  finalCta: {
+    title: "لنحمي بحرنا بالمعرفة والمشاركة",
+    text: "نجاح الورشة الأولى هو بداية لمسار أوسع يتيح لمزيد من الأطفال واليافعين والمدارس والجهات المشاركة في حماية البيئة البحرية وصناعة أثر مستدام يمكن قياسه وتطويره.",
+    tagline: "معًا نحول المعرفة إلى مشاركة… والمشاركة إلى أثر",
+    ctas: [
+      { label: "سجّل الآن", href: "#register" },
+      { label: "كن شريكًا", href: "#partnerships" },
+      { label: "تواصل معنا", href: "#contact" },
+    ],
+  },
+
+  footerLinks: ["سياسة الخصوصية", "شروط المشاركة", "سياسة استخدام الصور", "إخلاء المسؤولية", "حقوق الملكية الفكرية"],
 };
 
-export const nav = [
-  ["#top", "الرئيسية"],
-  ["#about", "عن المبادرة"],
-  ["#workshop", "الورشة"],
-  ["#programs", "برامجنا"],
-  ["#impact", "أثرنا"],
-  ["#partnerships", "الشراكات"],
-  ["#contact", "تواصل معنا"],
-] as const;
+export type Content = typeof ar;
 
-export const hero = {
-  title: "عينك على البحر",
-  slogan: site.slogan,
-  text: "مبادرة تعليمية ومجتمعية ضمن برنامج التطوع والشراكة المجتمعية «لنبادر» بمحافظة جدة، تهدف إلى تنمية وعي الأطفال واليافعين بالبيئة البحرية، وتعزيز مشاركتهم في حماية البحر الأحمر وشعابه المرجانية من خلال التعلم التجريبي، والعلوم المجتمعية، والتطوع، والتقنية.",
-  primary: { label: "سجّل في الورش المقبلة", href: "#register" },
-  secondary: { label: "كن شريكًا في المبادرة", href: "#partnerships" },
-  photo: "/photos/hero-beach-group.jpg",
+const en: Content = {
+  site: {
+    name: "Eyes on the Sea",
+    slogan: "We act today… so our sea remains for generations to come",
+    umbrella: "Part of the “Lnobader” Volunteering & Community Partnership Program – Jeddah Governorate",
+    email: ar.site.email,
+    phone: ar.site.phone,
+    location: "Jeddah – Kingdom of Saudi Arabia",
+  },
+
+  nav: [
+    ["#top", "Home"],
+    ["#about", "About"],
+    ["#workshop", "Workshop"],
+    ["#videos", "Videos"],
+    ["#programs", "Programs"],
+    ["#impact", "Impact"],
+    ["#partnerships", "Partnerships"],
+    ["#contact", "Contact"],
+  ],
+
+  ui: {
+    menu: "Menu",
+    switchLang: "العربية",
+    switchLangShort: "عربي",
+    entities: "Participating Entities",
+    aboutEyebrow: "About the Initiative",
+    umbrellaHeading: "Volunteering & community partnership in service of Jeddah",
+    vision: "Our Vision",
+    mission: "Our Mission",
+    vision2030Eyebrow: "Saudi Vision 2030",
+    programsEyebrow: "Our Programs",
+    partnershipsEyebrow: "Partnerships",
+    contact: "Contact Us",
+    contactText: "To register for upcoming programs, nominate schools and beneficiaries, or discuss partnership and sponsorship opportunities:",
+    emailLabel: "Email",
+    phoneLabel: "Phone",
+    locationLabel: "Location",
+    rights: "All rights reserved",
+    pathArrow: "→",
+    prev: "Previous image",
+    next: "Next image",
+    play: "Play",
+    close: "Close",
+    prevVideo: "Previous video",
+    nextVideo: "Next video",
+    videoOf: "of",
+  },
+
+  hero: {
+    title: "Eyes on the Sea",
+    slogan: "We act today… so our sea remains for generations to come",
+    workshopName: "The Sea Before Your Eyes",
+    workshopSubtitle: "Coral Farming Simulation & Marine Sustainability Workshop",
+    text: "An educational and community initiative under the “Lnobader” Volunteering & Community Partnership Program of Jeddah Governorate. It builds children’s and youth awareness of the marine environment and strengthens their role in protecting the Red Sea and its coral reefs through experiential learning, citizen science, volunteering, and technology.",
+    primary: { label: "Register for upcoming workshops", href: "#register" },
+    secondary: { label: "Become a partner", href: "#partnerships" },
+    photo: ar.hero.photo,
+    slides: [
+      { ...ar.hero.slides[0], alt: "Group photo of participants on Pearl Village beach" },
+      { ...ar.hero.slides[1], alt: "Groups before the coastal simulation" },
+      { ...ar.hero.slides[2], alt: "A coral anchoring-base model in participants’ hands" },
+      { ...ar.hero.slides[3], alt: "Eyes on the Sea #6 caps and vests" },
+      { ...ar.hero.slides[4], alt: "The outdoor cement-mould station" },
+    ],
+  },
+
+  entities: [
+    { name: "Makkah Region Emirate – Jeddah Governorate", role: "Institutional umbrella", logo: "/logos/jeddah-governorate.png" },
+    { name: "Lnobader Program", role: "Volunteering & community partnership program", logo: "/logos/lnobader.png" },
+    { name: "AlBaik Food Systems", role: "Organising entity", logo: "/logos/albaik.png" },
+    { name: "Jeddah Municipality", role: "Government partner", logo: "/logos/amanat-jeddah.png" },
+    { name: "17 SIXTY", role: "Supporting partner", logo: "/logos/17sixty.png" },
+  ],
+
+  about: {
+    title: "From knowledge to participation and impact",
+    text: "Eyes on the Sea offers a learning experience that connects children and youth with the marine environment through scientific knowledge, hands-on learning, safe simulation, citizen science, and volunteering. Rather than theoretical lectures alone, the initiative turns knowledge into a complete journey: discovering the marine environment, then observing, experimenting, and simulating, and finally participating, documenting, evaluating, and volunteering.",
+    umbrellaTitle: "Under the “Lnobader” umbrella",
+    umbrellaText: "“Lnobader” is Jeddah Governorate’s Volunteering & Community Partnership Program. It brings government bodies, the private sector, non-profits, and community members together to design and deliver initiatives that serve the governorate and its residents. Eyes on the Sea extends this direction with a specialised model for marine-environment awareness that links education, volunteering, social responsibility, and institutional partnership.",
+    umbrellaGoals: [
+      "Organise community participation in protecting the marine environment.",
+      "Engage children and youth in age-appropriate educational and volunteering programs.",
+      "Build partnerships across government, the private sector, and scientific and educational institutions.",
+      "Turn one-off events into sustained programs that can be tracked and measured.",
+      "Support flagship initiatives that strengthen Jeddah’s standing as an environmentally and socially responsible coastal city.",
+    ],
+    steps: [
+      { name: "Discover", desc: "Get to know the Red Sea, its coral reefs, and the life they support." },
+      { name: "Experiment", desc: "Take part in educational activities and safe, practical simulations." },
+      { name: "Reflect", desc: "Discuss what you saw and learned, and connect it to daily behaviour." },
+      { name: "Grow", desc: "Gain new skills in observation, documentation, and teamwork." },
+      { name: "Make an impact", desc: "Join volunteering, citizen science, and future environmental initiatives." },
+    ],
+    vision: "To help raise a generation that is aware of the marine environment, proud of the nation’s natural wealth, and able to take part scientifically and socially in protecting it.",
+    mission: "To deliver high-quality educational and volunteering programs for children and youth that link knowledge to practice and combine education, citizen science, and national responsibility — in a safe setting, with institutional partnerships and digital tools that support measuring and sustaining impact.",
+  },
+
+  vision2030: {
+    title: "A community initiative supporting national goals",
+    lead: "The initiative contributes to the targets of Saudi Vision 2030",
+    cards: [
+      { title: "A Vibrant Society", desc: "Raising environmental awareness, improving quality of life, and strengthening the bond with the nation’s natural resources." },
+      { title: "Volunteering", desc: "Offering organised volunteering opportunities for children and youth to serve the environment and community." },
+      { title: "Community Partnership", desc: "Bringing together government bodies, the private sector, schools, and scientific institutions." },
+      { title: "Digital Transformation", desc: "Using technology and data to register beneficiaries and measure the initiative’s impact." },
+    ],
+    disclaimer: "This alignment does not mean the initiative is an official Vision Realization Program; rather, through its goals, activities, and impact indicators, it supports the relevant national directions.",
+  },
+
+  workshop: {
+    eyebrow: "A successful first pilot phase",
+    title: "A successful workshop… and the start of lasting impact",
+    text: "The first pilot phase of “Eyes on the Sea #6” concluded successfully, with outstanding engagement from children, youth, and their families, and the participation of supporting, scientific, and implementing entities. The workshop combined marine-environment awareness, safety training, an educational simulation of coral-farming principles, teamwork, documentation, and citizen science.",
+    text2: "The experience was not built on rote instruction. Participants learned by doing, asked questions, discussed environmental challenges, and helped build training models that safely show how coral-reef protection and restoration projects work.",
+    stats: [
+      { value: "20", label: "Participants" },
+      { value: "6", label: "Training hours" },
+      { value: "2", label: "Practical days" },
+      { value: "4", label: "Participating entities" },
+    ],
+    date: "Wednesday 9 & Thursday 10 September 2026 · Pearl Village – Jeddah",
+    gallery: [
+      { src: "/photos/coral-model-hands.jpg", caption: "A coral anchoring-base model in participants’ hands" },
+      { src: "/photos/caps-and-vests.jpg", caption: "Eyes on the Sea #6 caps and vests" },
+      { src: "/photos/table-figures.jpg", caption: "Marine-life figures on the work table" },
+      { src: "/photos/outdoor-molds.jpg", caption: "The outdoor cement-mould station" },
+      { src: "/photos/talk-coral-slide.jpg", caption: "Introducing coral reefs and their threats" },
+      { src: "/photos/room-attentive.jpg", caption: "Participants follow the session in the workshop hall" },
+      { src: "/photos/speaker-banner.jpg", caption: "A talk in front of the campaign banner" },
+      { src: "/photos/gazebo-group.jpg", caption: "Groups before the coastal simulation" },
+    ],
+    days: [
+      {
+        label: "Day 1",
+        focus: "Scientific understanding and model building",
+        items: [
+          ["4:30", "Welcome, registration, and pre-assessment"],
+          ["4:45", "Opening and explaining the simulation’s scope"],
+          ["5:00", "The sea under the microscope: coral reefs and their threats"],
+          ["5:25", "Safety and responsibility"],
+          ["5:40", "Live technical demo of the structure and training bases"],
+          ["6:10", "Rotating fabrication stations"],
+          ["6:50", "Assembly and documentation"],
+          ["7:10", "Group presentations and reflection"],
+        ],
+      },
+      {
+        label: "Day 2",
+        focus: "Coastal simulation and citizen science",
+        items: [
+          ["4:30", "Readiness check and interactive review"],
+          ["4:55", "Coastal safety briefing and dry run"],
+          ["5:25", "Rotating coastal simulation (one group at a time)"],
+          ["6:05", "Retrieval and inventory: we leave nothing in the sea"],
+          ["6:30", "Citizen-science lab"],
+          ["6:50", "Impact measurement: post-test and survey"],
+          ["7:10", "Sea Guardians messages and behaviour pledge"],
+          ["7:25", "Closing and recognition"],
+        ],
+      },
+    ],
+  },
+
+  videos: {
+    eyebrow: "Video Gallery",
+    title: "See the workshop as participants lived it",
+    text: "Short clips from the first pilot phase: the workshop hall, the coastal stations, and the citizen-science lab.",
+    featuredBadge: "Featured",
+    count: "6 videos",
+    campaignTile: "The volunteer campaign for protecting Jeddah’s marine environment",
+    items: [
+      { ...ar.videos.items[0], title: "Moments from the workshop hall", desc: "Children and youth follow the session and join the discussion." },
+      { ...ar.videos.items[1], title: "Touring the awareness exhibit", desc: "Walking participants and families through the marine-environment boards." },
+      { ...ar.videos.items[2], title: "The citizen-science lab", desc: "Recording observations and documenting results on the laptop." },
+      { ...ar.videos.items[3], title: "Partners in success", desc: "The campaign banner and its partners at the event site." },
+      { ...ar.videos.items[4], title: "The workshop site on the beach", desc: "A view of the Pearl Village waterfront before the coastal simulation." },
+      { ...ar.videos.items[5], title: "The outdoor moulds station", desc: "Preparing the cement moulds for the training models." },
+    ],
+  },
+
+  guardians: {
+    eyebrow: "Guardians of the Nation’s Coral",
+    title: "From participant to guardian of the nation’s coral",
+    text: "“Guardians of the Nation’s Coral” is the extended educational and volunteering track of Eyes on the Sea. It moves children and youth from awareness to training, observation, documentation, citizen science, and participation in future environmental activities — according to each participant’s age, qualification, and the nature of the activity.",
+    text2: "Participants receive documentation of their participation and volunteering hours after completing the program requirements, helping them build an early record of community engagement and national responsibility.",
+    path: ["Awareness", "Training & simulation", "Observation & documentation", "Citizen science", "Environmental volunteering"],
+    cta: { label: "Join the Guardians of the Nation’s Coral", href: "#register" },
+    photo: ar.guardians.photo,
+  },
+
+  programs: {
+    title: "Initiative programs",
+    items: [
+      { title: "Marine awareness workshops", desc: "Interactive programs giving children and youth age-appropriate knowledge about the Red Sea, coral reefs, biodiversity, environmental risks, and responsible behaviour at coastal sites." },
+      { title: "Coral-farming simulation", desc: "A safe learning experience explaining the principles of protecting, restoring, and farming coral reefs using models and training pieces — without handling live coral or carrying out unauthorised marine work." },
+      { title: "Citizen science", desc: "Simple activities that help participants observe, photograph, record, and document, showing how the community can support scientific knowledge and track environmental change." },
+      { title: "Environmental volunteering", desc: "Opportunities to take part in awareness, event organisation, site service, documentation, and supporting younger participants, within approved safety rules and roles." },
+      { title: "School programs", desc: "Programs designed for schools, including educational visits, practical workshops, e-learning, student projects, and activities tied to volunteering hours and community service." },
+      { title: "Family programs", desc: "Sessions and activities that help families understand their role in shaping environmental behaviour and encourage parents to join their children in ongoing learning and community experiences." },
+    ],
+    cta: { label: "Register your interest in upcoming programs", href: "#register" },
+  },
+
+  dashboard: {
+    eyebrow: "Blue Impact Dashboard",
+    title: "Blue Impact Dashboard",
+    subtitle: "From activities to measurable results",
+    text: "A digital platform developed by Transformix to register beneficiaries, document activities and volunteering hours, measure learning outcomes, track partner contributions, and produce impact reports for government bodies, sponsors, and schools.",
+    note: "Illustrative model using first-phase figures. The platform offers different views: headline indicators for the public, and detailed reports for government bodies and partners according to approved permissions.",
+    privacy: "The platform protects children’s and youth data, obtains parental consent, manages access permissions, and never publishes photos or personal information except under approved consents and policies.",
+    demoTitle: "Blue Impact Dashboard · demo",
+    demoBadge: "Phase 1 · 2026",
+    prePostTitle: "Pre/post assessment results (%)",
+    pre: "Pre",
+    post: "Post",
+    partnersTitle: "Partner contributions",
+    sitesTitle: "Activity locations",
+    sitesNote: "New sites are added with every phase",
+    kpis: [
+      { label: "Beneficiaries", value: 20, unit: "participants" },
+      { label: "Training hours", value: 120, unit: "hours", hint: "20 participants × 6 hours" },
+      { label: "Programs delivered", value: 1, unit: "workshop" },
+      { label: "Participating entities", value: 4, unit: "entities" },
+      { label: "Target satisfaction", value: 85, unit: "%" },
+      { label: "Materials retrieved", value: 100, unit: "%" },
+    ],
+    prePost: [
+      { topic: "Coral reefs", pre: 45, post: 80 },
+      { topic: "Marine threats", pre: 40, post: 78 },
+      { topic: "Coastal safety", pre: 55, post: 90 },
+      { topic: "Citizen science", pre: 30, post: 70 },
+    ],
+    partnersContribution: [
+      { name: "Future Experts", share: "Delivery & measurement" },
+      { name: "Al Shams Tourism", share: "Scientific review" },
+      { name: "Jeddah Municipality", share: "Site coordination" },
+    ],
+    sites: ["Pearl Village – Jeddah"],
+    ctas: [
+      { label: "View the impact dashboard", href: "#impact" },
+      { label: "Request a demo for government bodies", href: "#partnerships" },
+    ],
+  },
+
+  transformix: {
+    eyebrow: "Transformix",
+    title: "The initiative’s technology & data partner",
+    text: "Transformix develops the initiative’s digital solutions, including online registration, beneficiary data management, assessments, certificates, data analytics, performance dashboards, and impact reports.",
+    text2: "This role moves the initiative from traditional event documentation to a digital model that supports decision-making and gives government bodies, sponsors, and partners a clear view of what was delivered and what was achieved. The same model can be applied to other government and community initiatives.",
+    capabilities: ["Online registration", "Beneficiary management", "Assessment & certificates", "Data analytics", "Dashboards", "Impact reports"],
+    cta: { label: "Talk to us about building an impact-measurement platform", href: "#partnerships" },
+  },
+
+  partnerships: {
+    title: "Together we create lasting impact",
+    text: "Eyes on the Sea welcomes partnerships with government bodies, municipalities, schools and universities, scientific centres, companies, and non-profits to deliver joint programs in marine awareness, citizen science, and environmental volunteering.",
+    areas: ["Program sponsorship", "Event hosting", "Beneficiary nomination", "Scientific expertise", "Volunteering support", "Digital platform development", "Impact measurement & reporting"],
+    text2: "The initiative’s model lets organisations move from supporting a short event to joining a sustained program with educational content, a beneficiary pathway, assessment tools, and a digital impact-measurement system.",
+    cta: "Request a partnership meeting",
+    types: ["Sponsorship", "Event hosting", "Beneficiary nomination", "Scientific support", "Volunteering", "Digital transformation", "Impact measurement", "Other"],
+  },
+
+  register: {
+    title: "Register for upcoming workshops",
+    subtitle: "Open a new door to learning and participation for your children",
+    text: "After the success of the first phase, Eyes on the Sea is preparing new programs and workshops so more children and youth can discover the marine environment and join age-appropriate educational and volunteering activities. Registration is an initial expression of interest; registrants will be contacted once program dates, locations, and participation conditions are confirmed.",
+    types: ["Parent", "School", "Participant", "Volunteer", "Youth assistant", "Government body", "Scientific partner", "Sponsor"],
+    success: "Thank you for your interest in Eyes on the Sea. The team will contact you once upcoming programs and dates are confirmed.",
+  },
+
+  finalCta: {
+    title: "Let’s protect our sea with knowledge and participation",
+    text: "The success of the first workshop is the start of a wider path that lets more children, youth, schools, and organisations take part in protecting the marine environment and creating lasting impact that can be measured and developed.",
+    tagline: "Together we turn knowledge into participation… and participation into impact",
+    ctas: [
+      { label: "Register now", href: "#register" },
+      { label: "Become a partner", href: "#partnerships" },
+      { label: "Contact us", href: "#contact" },
+    ],
+  },
+
+  footerLinks: ["Privacy Policy", "Participation Terms", "Photo Use Policy", "Disclaimer", "Intellectual Property"],
 };
 
-/** الجهات المشاركة — الترتيب البصري مقصود: المظلة → الحكومي/العلمي → المنفذ → التقني */
-export const entities = [
-  { name: "برنامج «لنبادر» بمحافظة جدة", role: "المظلة المؤسسية", logo: "/logos/jeddah-governorate.png" },
-  { name: "أمانة محافظة جدة", role: "شريك حكومي", logo: "/logos/amanat-jeddah.png" },
-  { name: "الشمس للسياحة", role: "الشريك العلمي والفني", logo: "/logos/shams.png" },
-  { name: "مكتب خبراء المستقبل", role: "الجهة المنفذة", logo: "/logos/future-experts.png" },
-  { name: "ترانسفورمكس", role: "الشريك التقني والبياني", logo: "/logos/transformix.png" },
-];
+export const content: Record<Lang, Content> = { ar, en };
 
-export const about = {
-  title: "من المعرفة إلى المشاركة والأثر",
-  text: "تقدم «عينك على البحر» تجربة تعليمية تربط الأطفال واليافعين بالبيئة البحرية من خلال المعرفة العلمية، والتعلم بالممارسة، والمحاكاة الآمنة، والعلوم المجتمعية، والتطوع. لا تقدم المبادرة المعرفة في صورة محاضرات نظرية فقط، بل تحولها إلى تجربة متكاملة تبدأ بالتعرف إلى البيئة البحرية، ثم الملاحظة والتجربة والمحاكاة، وتنتهي بالمشاركة والتوثيق والتقييم والتطوع.",
-  umbrellaTitle: "تحت مظلة «لنبادر»",
-  umbrellaText: "«لنبادر» هو برنامج التطوع والشراكة المجتمعية بمحافظة جدة، ويعمل على تعزيز مشاركة الجهات الحكومية والقطاع الخاص والمؤسسات غير الربحية وأفراد المجتمع في تصميم وتنفيذ المبادرات التي تخدم المحافظة وسكانها. وتأتي «عينك على البحر» امتدادًا لهذا التوجه، بتقديم نموذج متخصص في التوعية بالبيئة البحرية يربط بين التعليم والتطوع والمسؤولية الاجتماعية والشراكة المؤسسية.",
-  umbrellaGoals: [
-    "تنظيم مشاركة المجتمع في حماية البيئة البحرية.",
-    "إشراك الأطفال واليافعين في برامج تعليمية وتطوعية مناسبة لأعمارهم.",
-    "بناء شراكات تجمع بين الجهات الحكومية والقطاع الخاص والمؤسسات العلمية والتعليمية.",
-    "تحويل الفعاليات الفردية إلى برامج ممتدة يمكن متابعتها وقياس نتائجها.",
-    "دعم المبادرات النوعية التي تعزز مكانة جدة بوصفها مدينة بحرية ذات مسؤولية بيئية ومجتمعية.",
-  ],
-  steps: [
-    { name: "اكتشف", desc: "تعرف إلى البحر الأحمر وشعابه المرجانية والكائنات المرتبطة بها." },
-    { name: "جرّب", desc: "شارك في أنشطة تعليمية ومحاكاة عملية آمنة." },
-    { name: "تأمل", desc: "ناقش ما شاهدته وتعلمته، واربطه بسلوكك اليومي." },
-    { name: "طوّر", desc: "اكتسب مهارات جديدة في الملاحظة والتوثيق والعمل الجماعي." },
-    { name: "اصنع أثرًا", desc: "شارك في التطوع والعلوم المجتمعية والمبادرات البيئية المستقبلية." },
-  ],
-  vision: "الإسهام في بناء جيل واعٍ بالبيئة البحرية، معتز بثروات وطنه الطبيعية، وقادر على المشاركة العلمية والمجتمعية في حمايتها.",
-  mission: "تقديم برامج تعليمية وتطوعية نوعية للأطفال واليافعين، تربط المعرفة بالتطبيق، وتجمع بين التعليم والعلوم المجتمعية والمسؤولية الوطنية، ضمن بيئة آمنة وشراكات مؤسسية وأدوات تقنية تدعم قياس الأثر واستدامته.",
-};
-
-export const vision2030 = {
-  title: "مبادرة مجتمعية تدعم التوجهات الوطنية",
-  lead: "تسهم المبادرة في دعم مستهدفات رؤية السعودية 2030",
-  cards: [
-    { title: "مجتمع حيوي", desc: "تنمية الوعي البيئي وتعزيز جودة الحياة والارتباط بموارد الوطن الطبيعية." },
-    { title: "العمل التطوعي", desc: "إتاحة فرص تطوعية منظمة للأطفال واليافعين لخدمة البيئة والمجتمع." },
-    { title: "الشراكة المجتمعية", desc: "الجمع بين الجهات الحكومية والقطاع الخاص والمدارس والمؤسسات العلمية." },
-    { title: "التحول الرقمي", desc: "استخدام التقنية والبيانات في تسجيل المستفيدين وقياس أثر المبادرة." },
-  ],
-  disclaimer: "لا يعني هذا الارتباط أن المبادرة أحد برامج تحقيق الرؤية رسميًا، وإنما أنها تسهم، من خلال أهدافها وأنشطتها ومؤشرات أثرها، في دعم التوجهات الوطنية ذات الصلة.",
-};
-
-export const workshop = {
-  eyebrow: "نجاح المرحلة التطبيقية الأولى",
-  title: "ورشة ناجحة… وبداية لأثر مستدام",
-  text: "اختُتمت المرحلة التطبيقية الأولى من «عينك على البحر #6» بنجاح، وسط تفاعل متميز من الأطفال واليافعين وأسرهم، وبمشاركة الجهات الداعمة والعلمية والتنفيذية. وجمعت الورشة بين التوعية بالبيئة البحرية، والتدريب على السلامة، والمحاكاة التعليمية لمبادئ استزراع الشعاب المرجانية، والعمل الجماعي، والتوثيق، والعلوم المجتمعية.",
-  text2: "لم تعتمد التجربة على التلقين، بل أتاحت للمشاركين التعلم بالممارسة وطرح الأسئلة ومناقشة التحديات البيئية، والمشاركة في تنفيذ نماذج تدريبية توضح بصورة آمنة كيف تعمل مشروعات حماية الشعاب المرجانية واستعادتها.",
-  /** أرقام الورشة — حدّثها بالأرقام الفعلية بعد اعتماد التقرير */
-  stats: [
-    { value: "20", label: "مشاركًا" },
-    { value: "6", label: "ساعات تدريبية" },
-    { value: "2", label: "يومان تطبيقيان" },
-    { value: "4", label: "جهات مشاركة" },
-  ],
-  date: "الأربعاء 9 والخميس 10 سبتمبر 2026 · قرية اللؤلؤ – جدة",
-  gallery: [
-    { src: "/photos/coral-model-hands.jpg", caption: "نموذج قاعدة التثبيت المرجانية بين أيدي المشاركين" },
-    { src: "/photos/caps-and-vests.jpg", caption: "قبعات وسترات عينك على البحر #6" },
-    { src: "/photos/table-figures.jpg", caption: "مجسمات الكائنات البحرية على طاولة العمل" },
-    { src: "/photos/outdoor-molds.jpg", caption: "محطة القوالب الإسمنتية في الهواء الطلق" },
-    { src: "/photos/talk-coral-slide.jpg", caption: "التعريف بالشعاب المرجانية ومهدداتها" },
-    { src: "/photos/room-attentive.jpg", caption: "المشاركون يتابعون الشرح في قاعة الورشة" },
-    { src: "/photos/speaker-banner.jpg", caption: "كلمة أمام لوحة الحملة" },
-    { src: "/photos/gazebo-group.jpg", caption: "المجموعات قبل المحاكاة الساحلية" },
-  ],
-  days: [
-    {
-      label: "اليوم الأول",
-      focus: "الفهم العلمي وبناء النموذج",
-      items: [
-        ["4:30", "الاستقبال والتسجيل والقياس القبلي"],
-        ["4:45", "الافتتاح وشرح حدود المحاكاة"],
-        ["5:00", "البحر تحت المجهر: الشعاب المرجانية ومهدداتها"],
-        ["5:25", "السلامة والمسؤولية"],
-        ["5:40", "عرض فني مباشر للهيكل والقواعد التعليمية"],
-        ["6:10", "محطات التصنيع بالتناوب"],
-        ["6:50", "التجميع والتوثيق"],
-        ["7:10", "عرض المجموعات والتأمل"],
-      ],
-    },
-    {
-      label: "اليوم الثاني",
-      focus: "المحاكاة الساحلية والعلوم المجتمعية",
-      items: [
-        ["4:30", "فحص الجاهزية ومراجعة تفاعلية"],
-        ["4:55", "إحاطة السلامة الساحلية وتجربة جافة"],
-        ["5:25", "المحاكاة الساحلية بالتناوب (مجموعة واحدة في كل مرة)"],
-        ["6:05", "الاسترجاع والحصر: لا نترك شيئًا في البحر"],
-        ["6:30", "مختبر العلوم المجتمعية"],
-        ["6:50", "قياس الأثر: الاختبار البعدي والاستبيان"],
-        ["7:10", "رسائل حماة البحر والتعهد السلوكي"],
-        ["7:25", "الختام والتكريم"],
-      ],
-    },
-  ],
-};
-
-export const guardians = {
-  eyebrow: "حماة مرجان الوطن",
-  title: "من مشارك إلى حامٍ لمرجان الوطن",
-  text: "«حماة مرجان الوطن» هو المسار التعليمي والتطوعي الممتد لمبادرة «عينك على البحر»، وينقل الأطفال واليافعين من مرحلة التوعية إلى التدريب والملاحظة والتوثيق والعلوم المجتمعية والمشاركة في الأنشطة البيئية المستقبلية، وفق عمر المشارك وتأهيله وطبيعة النشاط.",
-  text2: "ويحصل المشاركون على توثيق لمشاركتهم وساعاتهم التطوعية بعد استكمال متطلبات البرنامج، بما يساعدهم على بناء سجل مبكر من المشاركة المجتمعية والمسؤولية الوطنية.",
-  path: ["التوعية", "التدريب والمحاكاة", "الملاحظة والتوثيق", "العلوم المجتمعية", "التطوع البيئي"],
-  cta: { label: "انضم إلى حماة مرجان الوطن", href: "#register" },
-  photo: "/photos/caps-and-vests.jpg",
-};
-
-export const programs = {
-  title: "برامج المبادرة",
-  items: [
-    { title: "ورش التوعية البحرية", desc: "برامج تفاعلية تقدم للأطفال واليافعين معرفة مناسبة لأعمارهم حول البحر الأحمر، والشعاب المرجانية، والتنوع الأحيائي، والمخاطر البيئية، والسلوك المسؤول في المواقع الساحلية." },
-    { title: "محاكاة استزراع الشعاب المرجانية", desc: "تجربة تعليمية آمنة تشرح مبادئ حماية الشعاب المرجانية واستعادتها واستزراعها باستخدام نماذج وقطع تدريبية، من دون التعامل مع مرجان حي أو تنفيذ أعمال بحرية غير مصرح بها." },
-    { title: "العلوم المجتمعية", desc: "أنشطة مبسطة تساعد المشاركين على الملاحظة والتصوير والتسجيل والتوثيق، وتوضح كيف يمكن للمجتمع أن يسهم في دعم المعرفة العلمية ورصد التغيرات البيئية." },
-    { title: "التطوع البيئي", desc: "فرص للمشاركة في التوعية، وتنظيم الفعاليات، وخدمة المواقع، والتوثيق، ودعم المشاركين الأصغر سنًا، وفق ضوابط السلامة والأدوار المعتمدة." },
-    { title: "البرامج المدرسية", desc: "برامج مصممة للمدارس تشمل الزيارات التعليمية، والورش التطبيقية، والتعلم الإلكتروني، والمشروعات الطلابية، والأنشطة المرتبطة بالساعات التطوعية وخدمة المجتمع." },
-    { title: "البرامج الأسرية", desc: "لقاءات وأنشطة تساعد الأسرة على فهم دورها في بناء السلوك البيئي، وتشجع أولياء الأمور على مشاركة أبنائهم في خبرات تعليمية ومجتمعية مستمرة." },
-  ],
-  cta: { label: "سجّل اهتمامك بالبرامج المقبلة", href: "#register" },
-};
-
-export const dashboard = {
-  eyebrow: "Blue Impact Dashboard",
-  title: "لوحة الأثر الأزرق",
-  subtitle: "من الأنشطة إلى نتائج قابلة للقياس",
-  text: "منصة رقمية تطورها ترانسفورمكس لتسجيل المستفيدين، وتوثيق الأنشطة والساعات التطوعية، وقياس نتائج التعلم، ومتابعة مساهمات الشركاء، وإعداد تقارير الأثر للجهات الحكومية والرعاة والمدارس.",
-  note: "نموذج توضيحي بأرقام المرحلة الأولى. تتيح المنصة مستويات عرض مختلفة: مؤشرات إجمالية للجمهور، وتقارير تفصيلية للجهات الحكومية والشركاء وفق الصلاحيات المعتمدة.",
-  privacy: "تلتزم المنصة بحماية بيانات الأطفال واليافعين، والحصول على موافقات أولياء الأمور، وتنظيم صلاحيات الوصول، وعدم نشر الصور أو المعلومات الشخصية إلا وفق الموافقات والسياسات المعتمدة.",
-  /** بيانات النموذج التوضيحي — حدّثها من تقرير الورشة */
-  kpis: [
-    { label: "المستفيدون", value: 20, unit: "مشاركًا" },
-    { label: "ساعات التدريب", value: 120, unit: "ساعة", hint: "20 مشاركًا × 6 ساعات" },
-    { label: "البرامج المنفذة", value: 1, unit: "ورشة" },
-    { label: "الجهات المشاركة", value: 4, unit: "جهات" },
-    { label: "الرضا المستهدف", value: 85, unit: "%" },
-    { label: "استرجاع المواد", value: 100, unit: "%" },
-  ],
-  /** نتائج القياس القبلي/البعدي — قيم مستهدفة حتى يُعتمد التقرير */
-  prePost: [
-    { topic: "الشعاب المرجانية", pre: 45, post: 80 },
-    { topic: "المهددات البحرية", pre: 40, post: 78 },
-    { topic: "السلامة الساحلية", pre: 55, post: 90 },
-    { topic: "العلوم المجتمعية", pre: 30, post: 70 },
-  ],
-  partnersContribution: [
-    { name: "خبراء المستقبل", share: "التنفيذ والقياس" },
-    { name: "الشمس للسياحة", share: "المراجعة العلمية" },
-    { name: "أمانة جدة", share: "التنسيق الموقعي" },
-  ],
-  sites: ["قرية اللؤلؤ – جدة"],
-  ctas: [
-    { label: "استعرض لوحة الأثر", href: "#impact" },
-    { label: "اطلب عرضًا للجهات الحكومية", href: "#partnerships" },
-  ],
-};
-
-export const transformix = {
-  eyebrow: "ترانسفورمكس",
-  title: "الشريك التقني والبياني للمبادرة",
-  text: "تتولى ترانسفورمكس تطوير الحلول الرقمية للمبادرة، بما يشمل التسجيل الإلكتروني، وإدارة بيانات المستفيدين، والتقييمات، والشهادات، وتحليل البيانات، ولوحات مؤشرات الأداء، وتقارير الأثر.",
-  text2: "يساعد هذا الدور على نقل المبادرة من توثيق الفعاليات بصورة تقليدية إلى نموذج رقمي يدعم اتخاذ القرار، ويمنح الجهات الحكومية والرعاة والشركاء رؤية واضحة لما تم تنفيذه وما تحقق من نتائج. ويمكن تطبيق هذا النموذج على المبادرات الحكومية والمجتمعية الأخرى.",
-  capabilities: ["التسجيل الإلكتروني", "إدارة المستفيدين", "التقييم والشهادات", "تحليل البيانات", "لوحات المؤشرات", "تقارير الأثر"],
-  cta: { label: "ناقش معنا تطوير منصة لقياس الأثر", href: "#partnerships" },
-};
-
-export const partnerships = {
-  title: "معًا نصنع أثرًا مستدامًا",
-  text: "ترحب «عينك على البحر» بالشراكة مع الجهات الحكومية، والأمانات والبلديات، والمدارس والجامعات، والمراكز العلمية، والشركات، والمؤسسات غير الربحية، لتنفيذ برامج مشتركة في التوعية البحرية والعلوم المجتمعية والتطوع البيئي.",
-  areas: ["رعاية البرامج", "استضافة الفعاليات", "ترشيح المستفيدين", "تقديم الخبرة العلمية", "دعم العمل التطوعي", "تطوير المنصات الرقمية", "قياس الأثر وإعداد التقارير"],
-  text2: "يتيح نموذج المبادرة للجهات الانتقال من دعم فعالية قصيرة إلى المشاركة في برنامج مستدام، يمتلك محتوى تعليميًا، ومسارًا للمستفيد، وأدوات للتقييم، ونظامًا رقميًا لقياس الأثر.",
-  cta: "طلب اجتماع شراكة",
-  types: ["رعاية", "استضافة فعاليات", "ترشيح مستفيدين", "دعم علمي", "تطوع", "تحول رقمي", "قياس أثر", "أخرى"],
-};
-
-export const register = {
-  title: "التسجيل في الورش المقبلة",
-  subtitle: "افتح لأبنائك بابًا جديدًا للتعلم والمشاركة",
-  text: "بعد نجاح المرحلة الأولى، تستعد «عينك على البحر» لإطلاق برامج وورش جديدة تتيح لمزيد من الأطفال واليافعين التعرف إلى البيئة البحرية والمشاركة في أنشطة تعليمية وتطوعية مناسبة لأعمارهم. يمثل التسجيل إبداء اهتمام أوليًا، وسيتم التواصل مع المسجلين عند اعتماد مواعيد البرامج ومواقعها وشروط المشاركة.",
-  types: ["ولي أمر", "مدرسة", "مشارك", "متطوع", "مساعد يافع", "جهة حكومية", "شريك علمي", "راعٍ"],
-  success: "شكرًا لاهتمامكم بمبادرة «عينك على البحر». سيتواصل معكم فريق المبادرة عند اعتماد البرامج والمواعيد المقبلة.",
-};
-
-export const finalCta = {
-  title: "لنحمي بحرنا بالمعرفة والمشاركة",
-  text: "نجاح الورشة الأولى هو بداية لمسار أوسع يتيح لمزيد من الأطفال واليافعين والمدارس والجهات المشاركة في حماية البيئة البحرية وصناعة أثر مستدام يمكن قياسه وتطويره.",
-  tagline: "معًا نحول المعرفة إلى مشاركة… والمشاركة إلى أثر",
-  ctas: [
-    { label: "سجّل الآن", href: "#register" },
-    { label: "كن شريكًا", href: "#partnerships" },
-    { label: "تواصل معنا", href: "#contact" },
-  ],
-};
-
-export const footerLinks = ["سياسة الخصوصية", "شروط المشاركة", "سياسة استخدام الصور", "إخلاء المسؤولية", "حقوق الملكية الفكرية"];
+/** الافتراضي (يُستخدم في الـ metadata على الخادم) */
+export const defaultLang: Lang = "ar";
+export const { site, nav, hero, entities, about, vision2030, workshop, videos, guardians, programs, dashboard, transformix, partnerships, register, finalCta, footerLinks } = ar;

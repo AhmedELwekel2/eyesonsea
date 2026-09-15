@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "@/lib/i18n";
 
 const arabic = IBM_Plex_Sans_Arabic({
   variable: "--font-arabic",
@@ -13,13 +14,14 @@ const description =
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://eyesonsea.mermates.club"),
-  title: "عينك على البحر | نبادر اليوم… ليبقى بحرنا للأجيال القادمة",
+  title: "عينك على البحر | Eyes on the Sea",
   description,
   keywords: ["عينك على البحر", "لنبادر", "محافظة جدة", "الشعاب المرجانية", "البحر الأحمر", "التطوع البيئي", "العلوم المجتمعية", "استزراع المرجان"],
   openGraph: {
     title: "عينك على البحر",
     description,
     locale: "ar_SA",
+    alternateLocale: ["en_US"],
     type: "website",
     images: [{ url: "/photos/hero-beach-group.jpg", width: 1600, height: 900 }],
   },
@@ -29,7 +31,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="ar" dir="rtl" className={`${arabic.variable} h-full antialiased scroll-smooth`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <LanguageProvider>{children}</LanguageProvider>
+      </body>
     </html>
   );
 }

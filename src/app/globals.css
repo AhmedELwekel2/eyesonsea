@@ -8,10 +8,10 @@
   --sea-700: #0f6b95;
   --sea-500: #1c9ccf;
   --sea-100: #dff1f8;
-  --coral-500: #ef7a5d;
-  --coral-100: #fde9e2;
-  --sand-100: #fbf6ee;
-  --teal-700: #0f6d6a;
+  --coral-500: #38bdf8; /* لهجة زرقاء فاتحة (كانت مرجانية) */
+  --coral-100: #bae6fd;
+  --sand-100: #eaf3fa;
+  --teal-700: #0369a1;
 }
 
 @theme inline {
@@ -38,4 +38,9 @@ body {
 .wave-divider {
   mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60' preserveAspectRatio='none'><path d='M0 30 C150 60 300 0 450 30 S750 60 900 30 S1200 0 1200 30 V60 H0 Z' fill='black'/></svg>");
   mask-size: 100% 100%;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

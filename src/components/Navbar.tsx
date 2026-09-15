@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { nav, site } from "@/lib/content";
+import { useLang } from "@/lib/i18n";
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const { lang, setLang, t } = useLang();
+  const { nav, site, ui } = t;
 
   return (
     <header className="sticky top-0 z-50 border-b border-sea-100 bg-white/85 backdrop-blur">
@@ -26,7 +28,15 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <button className="grid h-9 w-9 place-items-center rounded-full text-sea-800 hover:bg-sea-100 lg:hidden" onClick={() => setOpen((o) => !o)} aria-label="القائمة">
+          <button
+            onClick={() => setLang(lang === "ar" ? "en" : "ar")}
+            aria-label={ui.switchLang}
+            title={ui.switchLang}
+            className="rounded-full border border-sea-100 px-3 py-1.5 text-xs font-bold text-sea-800 hover:bg-sea-100"
+          >
+            {ui.switchLangShort}
+          </button>
+          <button className="grid h-9 w-9 place-items-center rounded-full text-sea-800 hover:bg-sea-100 lg:hidden" onClick={() => setOpen((o) => !o)} aria-label={ui.menu}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               {open ? <path d="M6 6l12 12M6 18L18 6" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
             </svg>

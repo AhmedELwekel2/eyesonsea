@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { workshop } from "@/lib/content";
+import { useLang } from "@/lib/i18n";
 
 export function WorkshopProgram() {
   const [day, setDay] = useState(0);
+  const { workshop } = useLang().t;
   const active = workshop.days[day];
 
   return (

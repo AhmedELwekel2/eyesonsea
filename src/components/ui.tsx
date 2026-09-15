@@ -8,8 +8,8 @@ export function Section({ id, className = "", children }: { id?: string; classNa
   );
 }
 
-export function Eyebrow({ children }: { children: ReactNode }) {
-  return <p className="mb-2 text-sm font-semibold text-teal-700">{children}</p>;
+export function Eyebrow({ children, className = "text-teal-700" }: { children: ReactNode; className?: string }) {
+  return <p className={`mb-2 text-sm font-semibold ${className}`}>{children}</p>;
 }
 
 export function Title({ children, className = "" }: { children: ReactNode; className?: string }) {

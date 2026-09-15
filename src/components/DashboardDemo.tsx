@@ -1,17 +1,20 @@
-import { dashboard } from "@/lib/content";
+"use client";
+
+import { useLang } from "@/lib/i18n";
 
 const PRE = "#0f6b95";
-const POST = "#ef7a5d";
+const POST = "#38bdf8";
 
 export function DashboardDemo() {
+  const { dashboard } = useLang().t;
   return (
     <div className="rounded-3xl border border-sea-100 bg-white p-4 shadow-lg sm:p-6">
       <div className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="h-2.5 w-2.5 rounded-full bg-coral-500" />
-          <span className="text-sm font-semibold text-sea-900">لوحة الأثر الأزرق · نموذج توضيحي</span>
+          <span className="text-sm font-semibold text-sea-900">{dashboard.demoTitle}</span>
         </div>
-        <span className="rounded-full bg-sea-100 px-2.5 py-1 text-xs text-sea-800">المرحلة الأولى · 2026</span>
+        <span className="rounded-full bg-sea-100 px-2.5 py-1 text-xs text-sea-800">{dashboard.demoBadge}</span>
       </div>
 
       {/* KPI tiles */}
@@ -23,7 +26,7 @@ export function DashboardDemo() {
               <span className="text-3xl font-extrabold text-sea-900" dir="ltr">{k.value}</span>
               <span className="text-xs text-sea-800/70">{k.unit}</span>
             </div>
-            {"hint" in k && k.hint && <div className="mt-1 text-[11px] text-sea-800/50">{k.hint}</div>}
+            {k.hint && <div className="mt-1 text-[11px] text-sea-800/50">{k.hint}</div>}
           </div>
         ))}
       </div>
@@ -31,19 +34,19 @@ export function DashboardDemo() {
       {/* Pre/post grouped bars */}
       <div className="mt-6">
         <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-          <h4 className="text-sm font-bold text-sea-900">نتائج القياس القبلي والبعدي (%)</h4>
+          <h4 className="text-sm font-bold text-sea-900">{dashboard.prePostTitle}</h4>
           <div className="flex gap-4 text-xs text-sea-800/80">
-            <span className="flex items-center gap-1.5"><i className="h-2.5 w-2.5 rounded-sm" style={{ background: PRE }} />قبلي</span>
-            <span className="flex items-center gap-1.5"><i className="h-2.5 w-2.5 rounded-sm" style={{ background: POST }} />بعدي</span>
+            <span className="flex items-center gap-1.5"><i className="h-2.5 w-2.5 rounded-sm" style={{ background: PRE }} />{dashboard.pre}</span>
+            <span className="flex items-center gap-1.5"><i className="h-2.5 w-2.5 rounded-sm" style={{ background: POST }} />{dashboard.post}</span>
           </div>
         </div>
         <ul className="space-y-3">
           {dashboard.prePost.map((r) => (
             <li key={r.topic}>
               <div className="mb-1 text-xs font-medium text-sea-900">{r.topic}</div>
-              <Bar value={r.pre} color={PRE} label="قبلي" />
+              <Bar value={r.pre} color={PRE} label={dashboard.pre} />
               <div className="h-0.5" />
-              <Bar value={r.post} color={POST} label="بعدي" />
+              <Bar value={r.post} color={POST} label={dashboard.post} />
             </li>
           ))}
         </ul>
@@ -52,7 +55,7 @@ export function DashboardDemo() {
       {/* Partners + sites */}
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <div className="rounded-2xl border border-sea-100 p-4">
-          <h4 className="mb-2 text-sm font-bold text-sea-900">مساهمة الجهات المشاركة</h4>
+          <h4 className="mb-2 text-sm font-bold text-sea-900">{dashboard.partnersTitle}</h4>
           <ul className="space-y-1.5 text-xs">
             {dashboard.partnersContribution.map((p) => (
               <li key={p.name} className="flex justify-between gap-2 border-b border-sea-100 pb-1.5 last:border-0">
@@ -63,7 +66,7 @@ export function DashboardDemo() {
           </ul>
         </div>
         <div className="rounded-2xl border border-sea-100 p-4">
-          <h4 className="mb-2 text-sm font-bold text-sea-900">انتشار الأنشطة</h4>
+          <h4 className="mb-2 text-sm font-bold text-sea-900">{dashboard.sitesTitle}</h4>
           <ul className="space-y-1.5 text-xs">
             {dashboard.sites.map((s) => (
               <li key={s} className="flex items-center gap-2 text-sea-900">
@@ -73,7 +76,7 @@ export function DashboardDemo() {
                 {s}
               </li>
             ))}
-            <li className="text-sea-800/50">مواقع جديدة تُضاف مع كل مرحلة</li>
+            <li className="text-sea-800/50">{dashboard.sitesNote}</li>
           </ul>
         </div>
       </div>
