@@ -6,12 +6,12 @@ import { Footer } from "@/components/Sections";
 import { logout, toggleProgress, useUser } from "@/lib/auth";
 import { useLang } from "@/lib/i18n";
 
-/** لوحة التعلم: تقدم المستخدم في مسار «حماة مرجان الوطن» (مراحل about.steps) */
+/** لوحة التعلم: تقدم المستخدم في مسار «حماة مرجان الوطن» (مراحل learning.steps) */
 export default function DashboardPage() {
   const { lang, t } = useLang();
-  const { dashboardPage: d, about, ui } = t;
+  const { dashboardPage: d, learning, ui } = t;
   const user = useUser();
-  const modules = about.steps.map((s, i) => ({ id: `stage-${i + 1}`, ...s }));
+  const modules = learning.steps.map((s, i) => ({ id: `stage-${i + 1}`, ...s }));
 
   return (
     <>

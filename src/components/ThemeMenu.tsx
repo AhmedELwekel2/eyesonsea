@@ -35,7 +35,7 @@ export function ThemeMenu() {
         aria-expanded={open}
         aria-label={ui.theme}
         title={ui.theme}
-        className="flex h-9 items-center gap-1.5 rounded-full border border-sea-100 px-2.5 text-sea-800 transition hover:bg-sea-100"
+        className="flex h-9 items-center gap-1.5 rounded-full border border-white/30 px-2.5 text-white transition hover:bg-white/10"
       >
         <Swatch colors={themeSwatches[theme]} />
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className={`transition ${open ? "rotate-180" : ""}`}><path d="M6 9l6 6 6-6" /></svg>
@@ -71,7 +71,7 @@ function Swatch({ colors }: { colors: readonly [string, string, string] }) {
   return (
     <span className="flex -space-x-1 rtl:space-x-reverse" aria-hidden>
       {colors.map((c) => (
-        <span key={c} className="h-4 w-4 rounded-full ring-2 ring-white" style={{ background: c }} />
+        <span key={c} className="h-4 w-4 rounded-full ring-2 ring-white/80" style={{ background: c }} />
       ))}
     </span>
   );

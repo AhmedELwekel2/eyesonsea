@@ -19,6 +19,7 @@ const ar = {
   nav: [
     ["/#top", "الرئيسية"],
     ["/#about", "عن المبادرة"],
+    ["/#learn", "التعلم"],
     ["/#workshop", "الورشة"],
     ["/#videos", "الفيديو"],
     ["/#programs", "برامجنا"],
@@ -32,7 +33,7 @@ const ar = {
     menu: "القائمة",
     switchLang: "English",
     switchLangShort: "EN",
-    entities: "الجهات المشاركة",
+    entities: "شركاء المبادرة",
     aboutEyebrow: "عن المبادرة",
     umbrellaHeading: "التطوع والشراكة المجتمعية في خدمة جدة",
     vision: "رؤيتنا",
@@ -68,11 +69,15 @@ const ar = {
   hero: {
     title: "عينك على البحر",
     slogan: "نبادر اليوم… ليبقى بحرنا للأجيال القادمة",
-    /** سطر الورشة في الواجهة الرئيسية */
-    workshopName: "البحر على عينك",
-    workshopSubtitle: "ورشة محاكاة استزراع المرجان والاستدامة البحرية",
+    /** العنوان الرئيسي الأبرز في الهيرو */
+    headline: "ورشة محاكاة استزراع المرجان والاستدامة البحرية",
+    /** سطر العلامة أسفل العنوان */
+    workshopName: "عينك على البحر",
+    workshopSubtitle: "مبادرة تعليمية ومجتمعية لحماية البحر الأحمر وشعابه المرجانية",
+    /** href سيُستخدم لاحقًا لربط الزر بنظام التعلم المستقل */
+    learn: { label: "ابدأ التعلم", href: "", soon: "نظام التعلم — قريبًا" },
     text: "مبادرة تعليمية ومجتمعية ضمن برنامج التطوع والشراكة المجتمعية «لنبادر» بمحافظة جدة، تهدف إلى تنمية وعي الأطفال واليافعين بالبيئة البحرية، وتعزيز مشاركتهم في حماية البحر الأحمر وشعابه المرجانية من خلال التعلم التجريبي، والعلوم المجتمعية، والتطوع، والتقنية.",
-    primary: { label: "انضم إلينا", href: "#register" },
+    primary: { label: "سجل الآن", href: "#register" },
     secondary: { label: "كن شريكًا في المبادرة", href: "#partnerships" },
     photo: "/photos/hero-beach-group.jpg",
     /** صور السلايدر — position = نقطة التركيز عند القص (object-position) */
@@ -85,14 +90,36 @@ const ar = {
     ] as { src: string; alt: string; position?: string }[],
   },
 
-  /** الجهات المشاركة — الشعارات من ترويسة «خطة صيانة وتنظيف مشتل المرجان في شاطئ لا مير» بالترتيب نفسه */
-  entities: [
-    { name: "إمارة منطقة مكة المكرمة – محافظة جدة", role: "المظلة المؤسسية", logo: "/logos/jeddah-governorate.png" },
-    { name: "برنامج «لنبادر»", role: "برنامج التطوع والشراكة المجتمعية", logo: "/logos/lnobader.png" },
-    { name: "البيك للأنظمة الغذائية", role: "الجهة المنظمة", logo: "/logos/albaik.png" },
-    { name: "أمانة محافظة جدة", role: "شريك حكومي", logo: "/logos/amanat-jeddah.png" },
-    { name: "17 SIXTY", role: "شريك داعم", logo: "/logos/17sixty.png" },
-  ],
+  /** شركاء المبادرة مصنفين بحسب الدور — الشعارات في public/logos */
+  partners: {
+    eyebrow: "منظومة الشراكة",
+    title: "شركاء المبادرة بحسب دورهم",
+    groups: [
+      {
+        title: "جهات حكومية",
+        items: [
+          { name: "إمارة منطقة مكة المكرمة – محافظة جدة", role: "المظلة المؤسسية", logo: "/logos/jeddah-governorate.png" },
+          { name: "أمانة محافظة جدة", role: "شريك حكومي", logo: "/logos/amanat-jeddah.png" },
+          { name: "الاتحاد السعودي للرياضات البحرية والغوص", role: "جهة حكومية", logo: "/logos/swsdf.png" },
+          { name: "المؤسسة العامة للمحافظة على الشعب المرجانية والسلاحف في البحر الأحمر", role: "جهة حكومية", logo: "/logos/coral-reefs-org.png" },
+          { name: "المركز الوطني لتنمية الحياة الفطرية", role: "جهة حكومية", logo: "/logos/ncw.png" },
+        ],
+      },
+      {
+        title: "جهات تنظيمية ومنفذة",
+        items: [
+          { name: "برنامج «لنبادر»", role: "برنامج التطوع والشراكة المجتمعية", logo: "/logos/lnobader.png" },
+          { name: "البيك للأنظمة الغذائية", role: "الجهة المنظمة", logo: "/logos/albaik.png" },
+          { name: "مكتب خبراء المستقبل", role: "الجهة المنفذة", logo: "/logos/future-experts.png" },
+        ],
+      },
+      {
+        title: "شركاء وجهات داعمة",
+        items: [{ name: "ترانسفورمكس", role: "الشريك التقني والبياني", logo: "/logos/transformix.png" }],
+      },
+    ],
+    implementedBy: "تنفيذ خبراء المستقبل للاستشارات التربوية والتعليمية",
+  },
 
   about: {
     title: "من المعرفة إلى المشاركة والأثر",
@@ -106,6 +133,15 @@ const ar = {
       "تحويل الفعاليات الفردية إلى برامج ممتدة يمكن متابعتها وقياس نتائجها.",
       "دعم المبادرات النوعية التي تعزز مكانة جدة بوصفها مدينة بحرية ذات مسؤولية بيئية ومجتمعية.",
     ],
+    vision: "الإسهام في بناء جيل واعٍ بالبيئة البحرية، معتز بثروات وطنه الطبيعية، وقادر على المشاركة العلمية والمجتمعية في حمايتها.",
+    mission: "تقديم برامج تعليمية وتطوعية نوعية للأطفال واليافعين، تربط المعرفة بالتطبيق، وتجمع بين التعليم والعلوم المجتمعية والمسؤولية الوطنية، ضمن بيئة آمنة وشراكات مؤسسية وأدوات تقنية تدعم قياس الأثر واستدامته.",
+  },
+
+  /** نظام التعلم — المسار التعليمي (المراحل نفسها تظهر في لوحة التعلم) */
+  learning: {
+    eyebrow: "نظام التعلم",
+    title: "مسار تعليمي من خمس مراحل",
+    text: "رحلة تعلم متدرجة تنقل المشارك من التعرف إلى البحر الأحمر إلى المشاركة الفعلية في حمايته. أنشئ حسابك لمتابعة تقدمك في كل مرحلة والحصول على توثيق لمشاركتك.",
     steps: [
       { name: "اكتشف", desc: "تعرف إلى البحر الأحمر وشعابه المرجانية والكائنات المرتبطة بها." },
       { name: "جرّب", desc: "شارك في أنشطة تعليمية ومحاكاة عملية آمنة." },
@@ -113,8 +149,9 @@ const ar = {
       { name: "طوّر", desc: "اكتسب مهارات جديدة في الملاحظة والتوثيق والعمل الجماعي." },
       { name: "اصنع أثرًا", desc: "شارك في التطوع والعلوم المجتمعية والمبادرات البيئية المستقبلية." },
     ],
-    vision: "الإسهام في بناء جيل واعٍ بالبيئة البحرية، معتز بثروات وطنه الطبيعية، وقادر على المشاركة العلمية والمجتمعية في حمايتها.",
-    mission: "تقديم برامج تعليمية وتطوعية نوعية للأطفال واليافعين، تربط المعرفة بالتطبيق، وتجمع بين التعليم والعلوم المجتمعية والمسؤولية الوطنية، ضمن بيئة آمنة وشراكات مؤسسية وأدوات تقنية تدعم قياس الأثر واستدامته.",
+    cta: "ابدأ التعلم الآن",
+    ctaLogged: "تابع مسارك في لوحة التعلم",
+    progress: "تقدمك",
   },
 
   vision2030: {
@@ -226,13 +263,13 @@ const ar = {
   },
 
   dashboard: {
-    eyebrow: "Blue Impact Dashboard",
-    title: "لوحة الأثر الأزرق",
+    eyebrow: "Impact Dashboard",
+    title: "لوحة الأثر",
     subtitle: "من الأنشطة إلى نتائج قابلة للقياس",
     text: "منصة رقمية تطورها ترانسفورمكس لتسجيل المستفيدين، وتوثيق الأنشطة والساعات التطوعية، وقياس نتائج التعلم، ومتابعة مساهمات الشركاء، وإعداد تقارير الأثر للجهات الحكومية والرعاة والمدارس.",
     note: "نموذج توضيحي بأرقام المرحلة الأولى. تتيح المنصة مستويات عرض مختلفة: مؤشرات إجمالية للجمهور، وتقارير تفصيلية للجهات الحكومية والشركاء وفق الصلاحيات المعتمدة.",
     privacy: "تلتزم المنصة بحماية بيانات الأطفال واليافعين، والحصول على موافقات أولياء الأمور، وتنظيم صلاحيات الوصول، وعدم نشر الصور أو المعلومات الشخصية إلا وفق الموافقات والسياسات المعتمدة.",
-    demoTitle: "لوحة الأثر الأزرق · نموذج توضيحي",
+    demoTitle: "لوحة الأثر · نموذج توضيحي",
     demoBadge: "المرحلة الأولى · 2026",
     prePostTitle: "نتائج القياس القبلي والبعدي (%)",
     pre: "قبلي",
@@ -258,7 +295,6 @@ const ar = {
     ],
     partnersContribution: [
       { name: "خبراء المستقبل", share: "التنفيذ والقياس" },
-      { name: "الشمس للسياحة", share: "المراجعة العلمية" },
       { name: "أمانة جدة", share: "التنسيق الموقعي" },
     ],
     sites: ["قرية اللؤلؤ – جدة"],
@@ -378,6 +414,7 @@ const en: Content = {
   nav: [
     ["/#top", "Home"],
     ["/#about", "About"],
+    ["/#learn", "Learning"],
     ["/#workshop", "Workshop"],
     ["/#videos", "Videos"],
     ["/#programs", "Programs"],
@@ -390,7 +427,7 @@ const en: Content = {
     menu: "Menu",
     switchLang: "العربية",
     switchLangShort: "عربي",
-    entities: "Participating Entities",
+    entities: "Initiative partners",
     aboutEyebrow: "About the Initiative",
     umbrellaHeading: "Volunteering & community partnership in service of Jeddah",
     vision: "Our Vision",
@@ -426,10 +463,12 @@ const en: Content = {
   hero: {
     title: "Eyes on the Sea",
     slogan: "We act today… so our sea remains for generations to come",
-    workshopName: "The Sea Before Your Eyes",
-    workshopSubtitle: "Coral Farming Simulation & Marine Sustainability Workshop",
+    headline: "Coral Farming Simulation & Marine Sustainability Workshop",
+    workshopName: "Eyes on the Sea",
+    workshopSubtitle: "An educational and community initiative protecting the Red Sea and its coral reefs",
+    learn: { label: "Start Learning", href: "", soon: "Learning system — coming soon" },
     text: "An educational and community initiative under the “Lnobader” Volunteering & Community Partnership Program of Jeddah Governorate. It builds children’s and youth awareness of the marine environment and strengthens their role in protecting the Red Sea and its coral reefs through experiential learning, citizen science, volunteering, and technology.",
-    primary: { label: "Join Us", href: "#register" },
+    primary: { label: "Register Now", href: "#register" },
     secondary: { label: "Become a partner", href: "#partnerships" },
     photo: ar.hero.photo,
     slides: [
@@ -441,13 +480,35 @@ const en: Content = {
     ],
   },
 
-  entities: [
-    { name: "Makkah Region Emirate – Jeddah Governorate", role: "Institutional umbrella", logo: "/logos/jeddah-governorate.png" },
-    { name: "Lnobader Program", role: "Volunteering & community partnership program", logo: "/logos/lnobader.png" },
-    { name: "AlBaik Food Systems", role: "Organising entity", logo: "/logos/albaik.png" },
-    { name: "Jeddah Municipality", role: "Government partner", logo: "/logos/amanat-jeddah.png" },
-    { name: "17 SIXTY", role: "Supporting partner", logo: "/logos/17sixty.png" },
-  ],
+  partners: {
+    eyebrow: "Partnership Ecosystem",
+    title: "Initiative partners by role",
+    groups: [
+      {
+        title: "Government entities",
+        items: [
+          { name: "Makkah Region Emirate – Jeddah Governorate", role: "Institutional umbrella", logo: "/logos/jeddah-governorate.png" },
+          { name: "Jeddah Municipality", role: "Government partner", logo: "/logos/amanat-jeddah.png" },
+          { name: "Saudi Water Sports & Diving Federation", role: "Government entity", logo: "/logos/swsdf.png" },
+          { name: "General Organization for Conservation of Coral Reefs and Turtles in the Red Sea", role: "Government entity", logo: "/logos/coral-reefs-org.png" },
+          { name: "National Center for Wildlife", role: "Government entity", logo: "/logos/ncw.png" },
+        ],
+      },
+      {
+        title: "Organising & implementing entities",
+        items: [
+          { name: "Lnobader Program", role: "Volunteering & community partnership program", logo: "/logos/lnobader.png" },
+          { name: "AlBaik Food Systems", role: "Organising entity", logo: "/logos/albaik.png" },
+          { name: "Future Experts Office", role: "Implementing entity", logo: "/logos/future-experts.png" },
+        ],
+      },
+      {
+        title: "Partners & supporting entities",
+        items: [{ name: "Transformix", role: "Technology & data partner", logo: "/logos/transformix.png" }],
+      },
+    ],
+    implementedBy: "Implemented by Future Experts for Educational & Learning Consulting",
+  },
 
   about: {
     title: "From knowledge to participation and impact",
@@ -461,6 +522,14 @@ const en: Content = {
       "Turn one-off events into sustained programs that can be tracked and measured.",
       "Support flagship initiatives that strengthen Jeddah’s standing as an environmentally and socially responsible coastal city.",
     ],
+    vision: "To help raise a generation that is aware of the marine environment, proud of the nation’s natural wealth, and able to take part scientifically and socially in protecting it.",
+    mission: "To deliver high-quality educational and volunteering programs for children and youth that link knowledge to practice and combine education, citizen science, and national responsibility — in a safe setting, with institutional partnerships and digital tools that support measuring and sustaining impact.",
+  },
+
+  learning: {
+    eyebrow: "Learning System",
+    title: "A five-stage learning path",
+    text: "A step-by-step journey that takes participants from discovering the Red Sea to actively helping protect it. Create an account to track your progress through each stage and document your participation.",
     steps: [
       { name: "Discover", desc: "Get to know the Red Sea, its coral reefs, and the life they support." },
       { name: "Experiment", desc: "Take part in educational activities and safe, practical simulations." },
@@ -468,8 +537,9 @@ const en: Content = {
       { name: "Grow", desc: "Gain new skills in observation, documentation, and teamwork." },
       { name: "Make an impact", desc: "Join volunteering, citizen science, and future environmental initiatives." },
     ],
-    vision: "To help raise a generation that is aware of the marine environment, proud of the nation’s natural wealth, and able to take part scientifically and socially in protecting it.",
-    mission: "To deliver high-quality educational and volunteering programs for children and youth that link knowledge to practice and combine education, citizen science, and national responsibility — in a safe setting, with institutional partnerships and digital tools that support measuring and sustaining impact.",
+    cta: "Start learning now",
+    ctaLogged: "Continue your path in the dashboard",
+    progress: "Your progress",
   },
 
   vision2030: {
@@ -579,13 +649,13 @@ const en: Content = {
   },
 
   dashboard: {
-    eyebrow: "Blue Impact Dashboard",
-    title: "Blue Impact Dashboard",
+    eyebrow: "Impact Dashboard",
+    title: "Impact Dashboard",
     subtitle: "From activities to measurable results",
     text: "A digital platform developed by Transformix to register beneficiaries, document activities and volunteering hours, measure learning outcomes, track partner contributions, and produce impact reports for government bodies, sponsors, and schools.",
     note: "Illustrative model using first-phase figures. The platform offers different views: headline indicators for the public, and detailed reports for government bodies and partners according to approved permissions.",
     privacy: "The platform protects children’s and youth data, obtains parental consent, manages access permissions, and never publishes photos or personal information except under approved consents and policies.",
-    demoTitle: "Blue Impact Dashboard · demo",
+    demoTitle: "Impact Dashboard · demo",
     demoBadge: "Phase 1 · 2026",
     prePostTitle: "Pre/post assessment results (%)",
     pre: "Pre",
@@ -609,7 +679,6 @@ const en: Content = {
     ],
     partnersContribution: [
       { name: "Future Experts", share: "Delivery & measurement" },
-      { name: "Al Shams Tourism", share: "Scientific review" },
       { name: "Jeddah Municipality", share: "Site coordination" },
     ],
     sites: ["Pearl Village – Jeddah"],
@@ -718,4 +787,4 @@ export const content: Record<Lang, Content> = { ar, en };
 
 /** الافتراضي (يُستخدم في الـ metadata على الخادم) */
 export const defaultLang: Lang = "ar";
-export const { site, nav, hero, entities, about, vision2030, workshop, videos, guardians, programs, dashboard, transformix, partnerships, register, finalCta, footerLinks } = ar;
+export const { site, nav, hero, partners, about, learning, vision2030, workshop, videos, guardians, programs, dashboard, transformix, partnerships, register, finalCta, footerLinks } = ar;

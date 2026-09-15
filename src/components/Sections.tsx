@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useLang } from "@/lib/i18n";
+import { useUser } from "@/lib/auth";
 import { Check, Eyebrow, Lead, Section, Title } from "./ui";
 import { DashboardDemo } from "./DashboardDemo";
 import { WorkshopProgram } from "./WorkshopProgram";
@@ -17,57 +19,74 @@ export function Hero() {
       <div className="relative aspect-[4/3] w-full sm:aspect-[16/9] lg:absolute lg:inset-0 lg:aspect-auto lg:h-full">
         <HeroCarousel />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-sea-900 to-transparent lg:hidden" />
-        <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-t from-sea-900/95 via-sea-900/40 to-sea-900/15 lg:block" />
+        <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-t from-sea-900/95 via-sea-900/50 to-sea-900/20 lg:block" />
       </div>
 
       <div className="relative mx-auto flex max-w-6xl flex-col px-4 pb-10 pt-6 sm:px-6 sm:pb-14 lg:pointer-events-none lg:min-h-[88vh] lg:justify-end lg:pb-16 lg:pt-24 [&>*]:lg:pointer-events-auto">
-        <p className="mb-3 inline-block w-fit rounded-full bg-white/15 px-3 py-1 text-xs font-medium backdrop-blur sm:mb-4 sm:text-sm">{site.umbrella}</p>
-        <h1 className="text-4xl font-extrabold leading-tight sm:text-5xl lg:text-7xl">{hero.title}</h1>
-        <p className="mt-2 text-lg font-semibold text-coral-100 sm:mt-3 sm:text-xl lg:text-2xl">{hero.slogan}</p>
-        <p className="mt-5 flex w-fit max-w-full flex-col gap-1 rounded-2xl border border-white/20 bg-white/10 px-4 py-3 backdrop-blur sm:mt-6 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-3">
-          <span className="text-lg font-extrabold text-white sm:text-xl">{hero.workshopName}</span>
-          <span className="hidden text-coral-100/80 sm:inline" aria-hidden>|</span>
-          <span className="text-sm font-medium text-sea-100 sm:text-base">{hero.workshopSubtitle}</span>
+        {/* 1. العنوان الرئيسي */}
+        <h1 className="max-w-4xl text-3xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">{hero.headline}</h1>
+
+        {/* 2. العلامة + الشعار */}
+        <p className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1">
+          <span className="text-xl font-bold text-coral-100 sm:text-2xl">{hero.workshopName}</span>
+          <span className="hidden text-coral-100/60 sm:inline" aria-hidden>|</span>
+          <span className="text-base font-medium text-sea-100 sm:text-lg">{hero.slogan}</span>
         </p>
-        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-sea-100 sm:mt-5 sm:text-base lg:text-lg">{hero.text}</p>
-        <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
-          <a href={hero.primary.href} className="inline-flex items-center gap-2 rounded-full bg-coral-500 px-6 py-3 text-sm font-bold text-sea-900 shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:text-base">
-            {hero.primary.label}
+
+        {/* 3. الأزرار */}
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          {/* TODO: اربطه بنظام التعلم المستقل عند جاهزيته (hero.learn.href) */}
+          <button type="button" title={hero.learn.soon} className="inline-flex items-center justify-center gap-2 rounded-full bg-coral-500 px-7 py-3.5 text-base font-bold text-sea-900 shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+            {hero.learn.label}
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="rtl:-scale-x-100"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-          </a>
-          <a href={hero.secondary.href} className="inline-flex items-center rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20 sm:text-base">
-            {hero.secondary.label}
+          </button>
+          <a href={hero.primary.href} className="inline-flex items-center justify-center rounded-full border-2 border-white/70 bg-white/10 px-7 py-3.5 text-base font-bold text-white backdrop-blur transition hover:bg-white hover:text-sea-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+            {hero.primary.label}
           </a>
         </div>
+
+        {/* 4. المظلة + النص التعريفي */}
+        <p className="mt-8 inline-block w-fit rounded-full bg-white/15 px-3 py-1 text-xs font-medium backdrop-blur sm:text-sm">{site.umbrella}</p>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-sea-100 sm:text-base">{hero.text}</p>
       </div>
     </section>
   );
 }
 
-/* ---------- 2. Entities ---------- */
+/* ---------- 2. Partners (by role) ---------- */
 
-export function Entities() {
-  const { entities, ui } = useLang().t;
+export function Partners() {
+  const { partners } = useLang().t;
   return (
-    <Section className="border-b border-sea-100 bg-white py-10">
-      <p className="mb-6 text-center text-sm font-semibold text-sea-800/70">{ui.entities}</p>
-      <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-        {entities.map((e) => (
-          <li key={e.name} className="flex flex-col items-center gap-2 text-center">
-            <div className="grid h-24 w-full place-items-center rounded-2xl border border-sea-100 bg-white p-3">
-              {e.logo ? (
-                <Image src={e.logo} alt={e.name} width={160} height={160} className="max-h-16 w-auto object-contain" />
-              ) : (
-                <span className="text-lg font-extrabold text-sea-900">{e.name}</span>
-              )}
-            </div>
-            <div>
-              <div className="text-xs font-bold text-sea-900" dir="auto">{e.name}</div>
-              <div className="text-[11px] text-teal-700">{e.role}</div>
-            </div>
-          </li>
+    <Section className="bg-gradient-to-b from-sea-800 to-sea-900 py-16 text-white">
+      <div className="mx-auto max-w-3xl text-center">
+        <Eyebrow className="text-coral-100">{partners.eyebrow}</Eyebrow>
+        <h2 className="text-2xl font-bold sm:text-3xl">{partners.title}</h2>
+      </div>
+      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {partners.groups.map((g) => (
+          <div key={g.title} className="rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+            <h3 className="mb-3 flex items-center gap-2 text-sm font-bold text-coral-100">
+              <span className="h-1.5 w-1.5 rounded-full bg-coral-500" />
+              {g.title}
+            </h3>
+            <ul className="space-y-3">
+              {g.items.map((e) => (
+                <li key={e.name} className="flex items-center gap-3">
+                  <div className="grid h-16 w-24 shrink-0 place-items-center rounded-xl bg-white p-2">
+                    <Image src={e.logo} alt={e.name} width={160} height={160} className="max-h-12 w-auto object-contain" />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-sm font-bold leading-snug" dir="auto">{e.name}</div>
+                    <div className="text-xs text-sea-100/75">{e.role}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         ))}
-      </ul>
+      </div>
+      <p className="mt-8 text-center text-sm font-semibold text-coral-100">{partners.implementedBy}</p>
     </Section>
   );
 }
@@ -77,22 +96,12 @@ export function Entities() {
 export function About() {
   const { about, ui } = useLang().t;
   return (
-    <Section id="about" className="py-20">
+    <Section id="about" className="bg-sand-100 py-20">
       <div className="mx-auto max-w-3xl text-center">
         <Eyebrow>{ui.aboutEyebrow}</Eyebrow>
         <Title>{about.title}</Title>
         <Lead>{about.text}</Lead>
       </div>
-
-      <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-        {about.steps.map((s, i) => (
-          <li key={s.name} className="relative rounded-2xl border border-sea-100 bg-white p-5 shadow-sm">
-            <span className="mb-3 grid h-10 w-10 place-items-center rounded-full bg-sea-700 font-bold text-white">{i + 1}</span>
-            <h3 className="text-lg font-bold text-sea-900">{s.name}</h3>
-            <p className="mt-1 text-sm text-sea-800/80">{s.desc}</p>
-          </li>
-        ))}
-      </ol>
 
       <div className="mt-14 grid gap-8 rounded-3xl bg-sea-900 p-8 text-white lg:grid-cols-2 lg:p-12">
         <div>
@@ -116,6 +125,54 @@ export function About() {
           <h3 className="font-bold text-sea-900">{ui.mission}</h3>
           <p className="mt-2 text-sm leading-relaxed text-sea-800/85">{about.mission}</p>
         </div>
+      </div>
+    </Section>
+  );
+}
+
+/* ---------- 3b. Learning system ---------- */
+
+export function Learning() {
+  const { learning } = useLang().t;
+  const user = useUser();
+  const done = user ? learning.steps.filter((_, i) => user.progress[`stage-${i + 1}`]).length : 0;
+  const pct = Math.round((done / learning.steps.length) * 100);
+  return (
+    <Section id="learn" className="bg-sea-900 py-20 text-white">
+      <div className="mx-auto max-w-3xl text-center">
+        <Eyebrow className="text-coral-100">{learning.eyebrow}</Eyebrow>
+        <h2 className="text-3xl font-bold sm:text-4xl">{learning.title}</h2>
+        <p className="mt-4 leading-relaxed text-sea-100/85">{learning.text}</p>
+      </div>
+
+      <ol className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {learning.steps.map((st, i) => {
+          const isDone = !!user?.progress[`stage-${i + 1}`];
+          return (
+            <li key={st.name} className={`relative rounded-2xl border p-5 transition ${isDone ? "border-coral-500/60 bg-white/10" : "border-white/10 bg-white/5"}`}>
+              <span className={`mb-3 grid h-10 w-10 place-items-center rounded-full font-bold ${isDone ? "bg-coral-500 text-sea-900" : "bg-white/15 text-white"}`}>{isDone ? "✓" : i + 1}</span>
+              <h3 className="text-lg font-bold">{st.name}</h3>
+              <p className="mt-1 text-sm text-sea-100/80">{st.desc}</p>
+            </li>
+          );
+        })}
+      </ol>
+
+      <div className="mt-10 flex flex-col items-center gap-4 text-center">
+        {user && (
+          <div className="w-full max-w-md">
+            <div className="mb-2 flex justify-between text-sm text-sea-100">
+              <span>{learning.progress}</span>
+              <span dir="ltr">{pct}%</span>
+            </div>
+            <div className="h-2.5 overflow-hidden rounded-full bg-white/15">
+              <div className="h-full rounded-full bg-coral-500 transition-all duration-700" style={{ width: `${pct}%` }} />
+            </div>
+          </div>
+        )}
+        <Link href={user ? "/dashboard" : "#register"} className="inline-flex items-center gap-2 rounded-full bg-coral-500 px-7 py-3.5 text-base font-bold text-sea-900 shadow-lg transition hover:-translate-y-0.5 hover:shadow-xl">
+          {user ? learning.ctaLogged : learning.cta}
+        </Link>
       </div>
     </Section>
   );
@@ -219,7 +276,7 @@ export function Guardians() {
 export function Programs() {
   const { programs, ui } = useLang().t;
   return (
-    <Section id="programs" className="py-20">
+    <Section id="programs" className="bg-sea-100/60 py-20">
       <div className="mx-auto max-w-2xl text-center">
         <Eyebrow>{ui.programsEyebrow}</Eyebrow>
         <Title>{programs.title}</Title>
@@ -242,19 +299,17 @@ export function Programs() {
 export function Impact() {
   const { dashboard } = useLang().t;
   return (
-    <Section id="impact" className="bg-sea-900 py-20 text-white">
-      <div className="grid items-start gap-10 lg:grid-cols-2">
-        <div>
-          <p className="mb-2 text-sm font-semibold text-coral-100" dir="ltr">{dashboard.eyebrow}</p>
-          <h2 className="text-3xl font-bold sm:text-4xl">{dashboard.title}</h2>
-          <p className="mt-2 text-lg text-sea-100">{dashboard.subtitle}</p>
-          <p className="mt-5 leading-relaxed text-sea-100/90">{dashboard.text}</p>
-          <p className="mt-4 text-sm leading-relaxed text-sea-100/70">{dashboard.note}</p>
-          <p className="mt-4 rounded-xl border border-white/10 bg-white/5 p-4 text-xs leading-relaxed text-sea-100/80">{dashboard.privacy}</p>
-        </div>
-        <div className="text-sea-900">
-          <DashboardDemo />
-        </div>
+    <Section id="impact" className="bg-sea-900 py-16 text-white lg:py-20">
+      {/* اللوحة أولًا ثم نصها أسفلها */}
+      <div className="mx-auto max-w-4xl">
+        <DashboardDemo />
+      </div>
+      <div className="mx-auto mt-10 max-w-3xl text-center">
+        <h2 className="text-3xl font-bold sm:text-4xl">{dashboard.title}</h2>
+        <p className="mt-2 text-lg text-sea-100">{dashboard.subtitle}</p>
+        <p className="mt-5 leading-relaxed text-sea-100/90">{dashboard.text}</p>
+        <p className="mt-4 text-sm leading-relaxed text-sea-100/70">{dashboard.note}</p>
+        <p className="mt-4 rounded-xl border border-white/10 bg-white/5 p-4 text-xs leading-relaxed text-sea-100/80">{dashboard.privacy}</p>
       </div>
     </Section>
   );
@@ -320,7 +375,7 @@ export function FinalCta() {
 }
 
 export function Footer() {
-  const { site, entities, footerLinks, ui } = useLang().t;
+  const { site, partners, footerLinks, ui } = useLang().t;
   return (
     <footer id="contact" className="scroll-mt-20 border-t border-sea-100 bg-white py-12">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-3">
@@ -341,7 +396,7 @@ export function Footer() {
         <div>
           <h3 className="font-bold text-sea-900">{ui.entities}</h3>
           <ul className="mt-2 space-y-1 text-sm text-sea-800/80">
-            {entities.map((e) => (
+            {partners.groups.flatMap((g) => g.items).map((e) => (
               <li key={e.name}><span dir="auto">{e.name}</span> <span className="text-teal-700">· {e.role}</span></li>
             ))}
           </ul>
